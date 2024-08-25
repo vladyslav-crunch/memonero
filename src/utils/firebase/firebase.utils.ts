@@ -3,9 +3,20 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  createUserWithEmailAndPassword,
   User,
+  signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  DocumentReference,
+  DocumentData,
+  QueryDocumentSnapshot,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -27,25 +38,80 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = async () => {
+  try {
+    const { user } = await signInWithPopup(auth, provider);
+    return user;
+  } catch (error) {
+    console.log("user closed the window", error);
+  }
+};
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth: User) => {
+export type AdditionInformation = {
+  displayName?: string;
+};
+
+export type UserData = {
+  createAt: Date;
+  displayName: string;
+  email: string;
+};
+
+export const createUserDocumentFromAuth = async (
+  userAuth: User | undefined,
+  additionInformation = {} as AdditionInformation
+): Promise<void | QueryDocumentSnapshot<UserData>> => {
+  if (!userAuth) return;
   const userDocRef = doc(db, "users", userAuth.uid);
-  console.log(userDocRef);
 
   const userSnapshot = await getDoc(userDocRef);
-  console.log(userSnapshot.exists());
+
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
+
     try {
-      await setDoc(userDocRef, { displayName, email, createdAt });
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionInformation,
+      });
     } catch (error) {
-      //TODO: Зробити вивід помилок на сторінці, а не тільки в консолі
       console.log("error creating the user", error);
     }
   }
-  return userDocRef;
+  console.log(userSnapshot);
+  return userSnapshot as QueryDocumentSnapshot<UserData>;
+};
+
+export const createAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+) => {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signOutUser = async () => signOut(auth);
+
+export const getUserInfoFromDB = async (userAuth: User | undefined) => {
+  if (!userAuth) {
+    return;
+  }
+  const userDocRef = doc(db, "users", userAuth.uid);
+  const userSnapshot = await getDoc(userDocRef);
+  if (userSnapshot.exists()) {
+    return userSnapshot.data();
+  }
 };
