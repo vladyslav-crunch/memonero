@@ -13,6 +13,18 @@ import Button from "../button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { ReactComponent as Google } from "../../assets/sign-in-icons/google.svg";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const MotionSingInFormContainer = motion(SignInFormContainer);
+
+const container = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
+};
+
 const SignInForm = () => {
   console.log(auth.currentUser);
 
@@ -55,7 +67,12 @@ const SignInForm = () => {
     }
   };
   return (
-    <SignInFormContainer>
+    <MotionSingInFormContainer
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 1, delay: 0.2 }}
+    >
       <h2>Welcome Back!</h2>
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -91,7 +108,7 @@ const SignInForm = () => {
           Sign in with Google
         </Button>
       </form>
-    </SignInFormContainer>
+    </MotionSingInFormContainer>
   );
 };
 

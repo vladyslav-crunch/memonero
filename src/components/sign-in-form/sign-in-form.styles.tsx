@@ -1,8 +1,7 @@
 import styled from "styled-components";
 export const SignInFormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 520px;
+  width: 520px;
+
   h2 {
     margin-bottom: 15px;
     font-size: 26px;
@@ -10,6 +9,7 @@ export const SignInFormContainer = styled.div`
   }
   p {
     margin-top: 10px;
+    text-align: center;
     a {
       font-weight: 600;
       cursor: pointer;
@@ -21,6 +21,6 @@ export const SignInFormContainer = styled.div`
     margin-top: 10px;
   }
   p + button {
-    margin-top: 10px;
+    margin-top: 15px;
   }
 `;

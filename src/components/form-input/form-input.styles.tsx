@@ -13,8 +13,9 @@ export const FormInputContainer = styled.div<FormInputContainerProps>`
   &::after {
     content: "";
     position: absolute;
-    top: 13.5px;
+    top: 35%;
     left: 15px;
+    transform: translateY(-35%);
     width: 24px;
     height: 24px;
     background: ${({ icon }) => `url(${icon}) center center no-repeat; `};
@@ -23,7 +24,7 @@ export const FormInputContainer = styled.div<FormInputContainerProps>`
 
 export const FormInputStyled = styled.input`
   padding-left: 50px;
-  height: 50px;
+  height: 60px;
   width: 100%;
   border: 2px solid #fff7f0;
   border-radius: 12px;
@@ -39,7 +40,7 @@ export const FormInputStyled = styled.input`
 
 export const ForgotPassword = styled.span`
   position: absolute;
-  top: 20px;
+  top: 21px;
   right: 15px;
   font-size: 13px;
   color: #05020a;
