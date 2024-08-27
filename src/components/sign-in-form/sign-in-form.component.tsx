@@ -11,10 +11,11 @@ import EmailIcon from "../../assets/sign-in-icons/Email.svg";
 import KeyIcon from "../../assets/sign-in-icons/key.svg";
 import Button from "../button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { ReactComponent as Google } from "../../assets/sign-in-icons/google.svg";
+import { ReactComponent as GoogleIcon } from "../../assets/sign-in-icons/google.svg";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import AuthError from "../auth-error/auth-error.component";
+import Spinner from "../spinner/spinner.component";
 
 const MotionSingInFormContainer = motion(SignInFormContainer);
 
@@ -77,6 +78,7 @@ const SignInForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
     if (TimeoutCounter !== undefined) {
       clearTimeout(TimeoutCounter);
     }
@@ -89,10 +91,12 @@ const SignInForm = () => {
         password
       );
       console.log(userCred);
+      setLoading(false);
       resetFormFields();
     } catch (error) {
       console.log(error);
       handleAuthError(error as AuthErrorType);
+      setLoading(false);
     }
   };
 
@@ -124,7 +128,11 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
-        <Button type="submit" buttonType={BUTTON_TYPE_CLASSES.signIn}>
+        <Button
+          type="submit"
+          buttonType={BUTTON_TYPE_CLASSES.signIn}
+          isLoading={isLoading}
+        >
           Sign in
         </Button>
         <p>
@@ -134,7 +142,7 @@ const SignInForm = () => {
           buttonType={BUTTON_TYPE_CLASSES.googleSignIn}
           onClick={logGoogleUser}
         >
-          <Google />
+          <GoogleIcon />
           Sign in with Google
         </Button>
       </SignInFormStyled>

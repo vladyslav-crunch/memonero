@@ -1,4 +1,9 @@
-import { BaseButton, SignInButton, SingInGoogle } from "./button.styles";
+import {
+  BaseButton,
+  ButtonSpinner,
+  SignInButton,
+  SingInGoogle,
+} from "./button.styles";
 import { ButtonHTMLAttributes } from "react";
 import { FC } from "react";
 
@@ -29,7 +34,7 @@ const Button: FC<ButtonProps> = ({
   const CustomButton = getButton(buttonType);
   return (
     <CustomButton disabled={isLoading} {...otherProps}>
-      {children}
+      {isLoading ? <ButtonSpinner /> : children}
     </CustomButton>
   );
 };

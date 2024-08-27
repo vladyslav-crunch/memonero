@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { SpinnerContainer } from "../spinner/spinner.styles";
 export const BaseButton = styled.button`
   min-width: 165px;
   width: 100%;
@@ -56,4 +56,9 @@ export const SingInGoogle = styled(BaseButton)`
   font-size: 16px;
   justify-content: space-around;
   border: none;
+`;
+
+export const ButtonSpinner = styled(SpinnerContainer)`
+  width: 35px;
+  height: 35px;
 `;
