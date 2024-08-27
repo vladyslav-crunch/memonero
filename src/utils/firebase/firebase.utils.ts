@@ -38,13 +38,10 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
+
 export const signInWithGooglePopup = async () => {
-  try {
-    const { user } = await signInWithPopup(auth, provider);
-    return user;
-  } catch (error) {
-    console.log("user closed the window", error);
-  }
+  const { user } = await signInWithPopup(auth, provider);
+  return user;
 };
 
 export const db = getFirestore();
@@ -83,7 +80,6 @@ export const createUserDocumentFromAuth = async (
       console.log("error creating the user", error);
     }
   }
-  console.log(userSnapshot);
   return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 

@@ -33,7 +33,6 @@ const SignUp = () => {
       );
       if (userCred) {
         const { user } = userCred;
-        console.log(user);
         const userSnapshot = createUserDocumentFromAuth(user, { displayName });
       }
     } catch (error) {

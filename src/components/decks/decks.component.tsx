@@ -14,7 +14,6 @@ export type DeckType = {
 
 const Decks: FC = () => {
   const [decks, setDecks] = useState<DeckType[]>([]);
-  console.log(decks);
 
   const CreateDeck = (): void => {
     // Define a new deck

@@ -15,7 +15,7 @@ import { ReactComponent as GoogleIcon } from "../../assets/sign-in-icons/google.
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import AuthError from "../auth-error/auth-error.component";
-import Spinner from "../spinner/spinner.component";
+import { useNavigate } from "react-router-dom";
 
 const MotionSingInFormContainer = motion(SignInFormContainer);
 
@@ -30,6 +30,8 @@ const container = {
 let TimeoutCounter: NodeJS.Timeout | undefined;
 
 const SignInForm = () => {
+  const navigate = useNavigate();
+
   const defaultFormFields = {
     email: "",
     password: "",
@@ -45,10 +47,12 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const logGoogleUser = async () => {
+  const logGoogleUser = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     try {
       const user = await signInWithGooglePopup();
       await createUserDocumentFromAuth(user);
+      navigate("/");
     } catch (error) {
       console.log(error);
       handleAuthError(error as AuthErrorType);
@@ -63,6 +67,10 @@ const SignInForm = () => {
   };
 
   const handleAuthError = (error: AuthErrorType) => {
+    console.log(error.code);
+    if (error.code === "auth/popup-closed-by-user") {
+      return;
+    }
     if (error.code === "auth/invalid-credential") {
       setError("Invalid Email or Password");
     } else {
@@ -90,9 +98,10 @@ const SignInForm = () => {
         email,
         password
       );
-      console.log(userCred);
+
       setLoading(false);
       resetFormFields();
+      navigate("/");
     } catch (error) {
       console.log(error);
       handleAuthError(error as AuthErrorType);

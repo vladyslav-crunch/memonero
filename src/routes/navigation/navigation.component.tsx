@@ -38,7 +38,6 @@ const Navigation = () => {
         setUser(undefined);
       }
     });
-    console.log(user);
     // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);

@@ -56,6 +56,9 @@ export const SingInGoogle = styled(BaseButton)`
   font-size: 16px;
   justify-content: space-around;
   border: none;
+  background-color: #fff7f0;
+  font-weight: 500;
+  color: #6e6e6e;
 `;
 
 export const ButtonSpinner = styled(SpinnerContainer)`
