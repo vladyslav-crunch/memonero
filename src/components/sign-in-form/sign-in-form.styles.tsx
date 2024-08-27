@@ -24,3 +24,17 @@ export const SignInFormContainer = styled.div`
     margin-top: 15px;
   }
 `;
+
+type SignInFormStyledProps = {
+  error?: string;
+};
+
+export const SignInFormStyled = styled.form<SignInFormStyledProps>`
+  div:nth-child(1) input {
+    border: ${({ error }) => (error ? "solid 2px #FF7257 !important" : "none")};
+    &:focus {
+      border: 2px solid #ed9e8f;
+      outline: none;
+    }
+  }
+`;

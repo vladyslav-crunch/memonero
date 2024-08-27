@@ -2,17 +2,6 @@ import { AuthCard, AuthCardsContainer } from "./authCards.styles";
 import { motion } from "framer-motion";
 const MotionAuthCard = motion(AuthCard);
 const MotionAuthCardContainer = motion(AuthCardsContainer);
-// type AuthCardType = {
-//   badge: string;
-//   front: string;
-//   back: string;
-//   additional: string;
-//   color: string;
-// };
-
-// type AuthCardProps = {
-//   cards: AuthCardType[];
-// };
 
 const cards = [
   {

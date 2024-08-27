@@ -4,6 +4,8 @@ import {
   FormInputContainer,
   ForgotPassword,
 } from "./form-input.styles";
+import { AuthError } from "firebase/auth";
+
 type FormInputProps = {
   icon: string;
   withForgot?: boolean;

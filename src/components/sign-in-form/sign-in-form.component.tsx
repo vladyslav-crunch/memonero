@@ -1,11 +1,11 @@
 import { signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
 import {
   createUserDocumentFromAuth,
-  auth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
+import { AuthError as AuthErrorType } from "firebase/auth";
 import { useState, ChangeEvent, FormEvent } from "react";
-import { SignInFormContainer } from "./sign-in-form.styles";
+import { SignInFormContainer, SignInFormStyled } from "./sign-in-form.styles";
 import FormInput from "../form-input/form-input.component";
 import EmailIcon from "../../assets/sign-in-icons/Email.svg";
 import KeyIcon from "../../assets/sign-in-icons/key.svg";
@@ -13,7 +13,8 @@ import Button from "../button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { ReactComponent as Google } from "../../assets/sign-in-icons/google.svg";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import AuthError from "../auth-error/auth-error.component";
 
 const MotionSingInFormContainer = motion(SignInFormContainer);
 
@@ -25,9 +26,9 @@ const container = {
   },
 };
 
-const SignInForm = () => {
-  console.log(auth.currentUser);
+let TimeoutCounter: NodeJS.Timeout | undefined;
 
+const SignInForm = () => {
   const defaultFormFields = {
     email: "",
     password: "",
@@ -35,23 +36,50 @@ const SignInForm = () => {
 
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const [error, setError] = useState<string>();
+  const [isAuthErrorVisible, setAuthErrorVisible] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const logGoogleUser = async () => {
-    const user = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    try {
+      const user = await signInWithGooglePopup();
+      await createUserDocumentFromAuth(user);
+    } catch (error) {
+      console.log(error);
+      handleAuthError(error as AuthErrorType);
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
+    setError(undefined);
+    setAuthErrorVisible(false);
+  };
+
+  const handleAuthError = (error: AuthErrorType) => {
+    if (error.code === "auth/invalid-credential") {
+      setError("Invalid Email or Password");
+    } else {
+      setError("Something went wrong");
+    }
+    if (error.code) {
+      setAuthErrorVisible(true);
+      TimeoutCounter = setTimeout(() => {
+        setAuthErrorVisible(false);
+      }, 5000);
+    }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (TimeoutCounter !== undefined) {
+      clearTimeout(TimeoutCounter);
+    }
     if (!email || !password) {
       return;
     }
@@ -64,8 +92,10 @@ const SignInForm = () => {
       resetFormFields();
     } catch (error) {
       console.log(error);
+      handleAuthError(error as AuthErrorType);
     }
   };
+
   return (
     <MotionSingInFormContainer
       variants={container}
@@ -74,7 +104,7 @@ const SignInForm = () => {
       transition={{ duration: 1, delay: 0.2 }}
     >
       <h2>Welcome Back!</h2>
-      <form onSubmit={handleSubmit}>
+      <SignInFormStyled onSubmit={handleSubmit} error={error}>
         <FormInput
           icon={EmailIcon}
           placeholder="Email"
@@ -107,7 +137,10 @@ const SignInForm = () => {
           <Google />
           Sign in with Google
         </Button>
-      </form>
+      </SignInFormStyled>
+      <AnimatePresence>
+        {isAuthErrorVisible && <AuthError error={error!} key="toast" />}
+      </AnimatePresence>
     </MotionSingInFormContainer>
   );
 };
