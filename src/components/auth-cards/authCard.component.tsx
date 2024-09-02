@@ -8,7 +8,7 @@ const cards = [
     badge: "jp",
     front: "こんにちは",
     back: "Привіт",
-    additional: "Lorem ipsum dolor sit amet.",
+    additional: '"Привіт, вітаю на Memonero"',
     color: "D6BDFC",
   },
   {

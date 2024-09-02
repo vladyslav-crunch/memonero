@@ -102,10 +102,8 @@ export const signInAuthUserWithEmailAndPassword = async (
 export const signOutUser = async () => signOut(auth);
 
 export const getUserInfoFromDB = async (userAuth: User | undefined) => {
-  if (!userAuth) {
-    return;
-  }
-  const userDocRef = doc(db, "users", userAuth.uid);
+  // @ts-ignore
+  const userDocRef = doc(db, "users", userAuth?.uid);
   const userSnapshot = await getDoc(userDocRef);
   if (userSnapshot.exists()) {
     return userSnapshot.data();

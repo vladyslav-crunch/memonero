@@ -16,7 +16,7 @@ export const BaseButton = styled.button`
   cursor: pointer;
 `;
 
-export const SignInButton = styled(BaseButton)`
+export const SignButton = styled(BaseButton)`
   background: linear-gradient(
     150deg,
     rgba(236, 156, 51, 0.616) 0%,

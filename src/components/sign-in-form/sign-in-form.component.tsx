@@ -139,13 +139,13 @@ const SignInForm = () => {
         />
         <Button
           type="submit"
-          buttonType={BUTTON_TYPE_CLASSES.signIn}
+          buttonType={BUTTON_TYPE_CLASSES.sign}
           isLoading={isLoading}
         >
           Sign in
         </Button>
         <p>
-          Don't have an account? <Link to={"/sign-up"}>Sign up</Link>
+          Don't have an account? <Link to={"/sign-up"}>Sign Up</Link>
         </p>
         <Button
           buttonType={BUTTON_TYPE_CLASSES.googleSignIn}

@@ -18,10 +18,8 @@ const Navigation = () => {
 
   const setUserFromDataBase = async (user: User) => {
     const UserFromDB = await getUserInfoFromDB(user);
-    if (!UserFromDB || !UserFromDB.displayName) {
-      return;
-    }
-    const newUser = { ...user, displayName: UserFromDB.displayName };
+    console.log(UserFromDB);
+    const newUser = { ...user, displayName: UserFromDB?.displayName };
     setUser(newUser);
   };
 
@@ -34,11 +32,8 @@ const Navigation = () => {
         } else {
           setUserFromDataBase(user);
         }
-      } else {
-        setUser(undefined);
       }
     });
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
@@ -51,7 +46,9 @@ const Navigation = () => {
           <NavLink to="/setting">Setting</NavLink>
           <NavLink to="/support">Support</NavLink>
         </NavLinkContainer>
-        <div>{user && <p>You are logged as: {user.displayName}</p>}</div>
+        <div>
+          <p>You are logged as: {user?.email}</p>
+        </div>
       </NavigationContainer>
       <OutletWrapper>
         <Outlet />

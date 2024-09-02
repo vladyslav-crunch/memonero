@@ -7,7 +7,7 @@ import {
 import { AuthError } from "firebase/auth";
 
 type FormInputProps = {
-  icon: string;
+  icon?: string;
   withForgot?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
