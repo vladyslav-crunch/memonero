@@ -18,6 +18,7 @@ export const FormInputContainer = styled.div<FormInputContainerProps>`
     transform: translateY(-35%);
     width: 24px;
     height: 24px;
+    margin-top: 4px;
     background: ${({ icon }) => `url(${icon}) center center no-repeat; `};
   }
 `;
@@ -31,7 +32,6 @@ export const FormInputStyled = styled.input`
   background-color: #fff7f0;
   font-size: 16px;
   font-weight: 200;
-  margin-bottom: 14px;
   &:focus {
     border: 2px solid #ed9e8f;
     outline: none;

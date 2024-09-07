@@ -1,7 +1,6 @@
-import { AuthError as AuthErrorType } from "firebase/auth";
-import { AuthErrorContainer } from "./auth-error.styles";
-import { FC, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AuthErrorContainer } from "./auth-error-popup.styles";
+import { FC } from "react";
+import { motion } from "framer-motion";
 import errorIcon from "../../assets/sign-in-icons/error.svg";
 
 const MotionAuthErrorContainer = motion(AuthErrorContainer);
@@ -10,7 +9,7 @@ type AuthErrorProps = {
   error: string;
 };
 
-const AuthError: FC<AuthErrorProps> = ({ error }) => {
+const AuthErrorPopup: FC<AuthErrorProps> = ({ error }) => {
   return (
     <MotionAuthErrorContainer
       key="toast"
@@ -24,4 +23,4 @@ const AuthError: FC<AuthErrorProps> = ({ error }) => {
   );
 };
 
-export default AuthError;
+export default AuthErrorPopup;

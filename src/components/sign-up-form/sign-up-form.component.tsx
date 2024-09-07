@@ -6,7 +6,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import { AuthError as AuthErrors } from "firebase/auth";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 import {
   SignUpFormStyled,
   SignUpFormContainer,
@@ -17,7 +17,7 @@ import Button from "../button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import AuthError from "../auth-error/auth-error.component";
+import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
 
 const MotionSingUpFormContainer = motion(SignUpFormContainer);
 
@@ -53,14 +53,17 @@ const SignUpForm = () => {
     setCheckboxChecked(false);
   };
 
-  const handleAuthError = (error: AuthErrors) => {
+  const handleAuthError = (error: AuthError) => {
     console.log(error.code);
-    if (error.code === "auth/email-already-in-use") {
-      setError("This email is already in use");
-    } else if (error.code === "auth/invalid-email") {
-      setError("Invalid email");
-    } else {
-      setError("Something went wrong");
+    switch (error.code) {
+      case AuthErrorCodes.EMAIL_EXISTS:
+        setError("This email is already in use");
+        break;
+      case AuthErrorCodes.INVALID_EMAIL:
+        setError("Invalid email");
+        break;
+      default:
+        setError("Something went wrong");
     }
     if (error.code) {
       setAuthErrorVisible(true);
@@ -108,13 +111,13 @@ const SignUpForm = () => {
       );
       if (userCred) {
         const { user } = userCred;
-        createUserDocumentFromAuth(user, { displayName });
+        await createUserDocumentFromAuth(user, { displayName });
         resetFormFields();
         navigate("/");
       }
-      setLoading(false);
     } catch (error) {
-      handleAuthError(error as AuthErrors);
+      handleAuthError(error as AuthError);
+    } finally {
       setLoading(false);
     }
   };
@@ -187,7 +190,7 @@ const SignUpForm = () => {
           Already have an account? <Link to={"/sign-in"}>Sign In</Link>
         </p>
         <AnimatePresence>
-          {isAuthErrorVisible && <AuthError error={error!} key="toast" />}
+          {isAuthErrorVisible && <AuthErrorPopup error={error!} key="toast" />}
         </AnimatePresence>
       </SignUpFormStyled>
     </MotionSingUpFormContainer>

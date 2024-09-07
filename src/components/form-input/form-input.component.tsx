@@ -4,14 +4,19 @@ import {
   FormInputContainer,
   ForgotPassword,
 } from "./form-input.styles";
-import { AuthError } from "firebase/auth";
 
 type FormInputProps = {
   icon?: string;
   withForgot?: boolean;
+  onForgot?: () => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const FormInput: FC<FormInputProps> = ({ icon, withForgot, ...otherProps }) => {
+const FormInput: FC<FormInputProps> = ({
+  icon,
+  withForgot,
+  onForgot,
+  ...otherProps
+}) => {
   return (
     <FormInputContainer
       className="form-input-container"
@@ -19,7 +24,9 @@ const FormInput: FC<FormInputProps> = ({ icon, withForgot, ...otherProps }) => {
       icon={icon}
     >
       <FormInputStyled {...otherProps} />
-      {withForgot && <ForgotPassword>Forgot?</ForgotPassword>}
+      {withForgot && (
+        <ForgotPassword onClick={onForgot}>Forgot?</ForgotPassword>
+      )}
     </FormInputContainer>
   );
 };

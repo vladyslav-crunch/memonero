@@ -21,7 +21,7 @@ export const SignInFormContainer = styled.div`
     margin-top: 10px;
   }
   p + button {
-    margin-top: 15px;
+    margin-top: 10px;
   }
 `;
 
@@ -30,6 +30,9 @@ type SignInFormStyledProps = {
 };
 
 export const SignInFormStyled = styled.form<SignInFormStyledProps>`
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   div:nth-child(1) input {
     border: ${({ error }) => (error ? "solid 2px #FF7257 !important" : "none")};
     &:focus {

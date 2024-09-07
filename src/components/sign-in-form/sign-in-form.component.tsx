@@ -3,7 +3,7 @@ import {
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
-import { AuthError as AuthErrorType } from "firebase/auth";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { SignInFormContainer, SignInFormStyled } from "./sign-in-form.styles";
 import FormInput from "../form-input/form-input.component";
@@ -14,9 +14,9 @@ import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { ReactComponent as GoogleIcon } from "../../assets/sign-in-icons/google.svg";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import AuthError from "../auth-error/auth-error.component";
+import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
 import { useNavigate } from "react-router-dom";
-
+import ForgotPasswordModal from "../forgot-password-modal/forgot-password-modal.component";
 const MotionSingInFormContainer = motion(SignInFormContainer);
 
 const container = {
@@ -42,7 +42,7 @@ const SignInForm = () => {
   const [error, setError] = useState<string>();
   const [isAuthErrorVisible, setAuthErrorVisible] = useState(false);
   const [isLoading, setLoading] = useState(false);
-
+  const [isModalOpen, setModalOpen] = useState(false);
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -55,7 +55,7 @@ const SignInForm = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
-      handleAuthError(error as AuthErrorType);
+      handleAuthError(error as AuthError);
     }
   };
 
@@ -66,15 +66,16 @@ const SignInForm = () => {
     setAuthErrorVisible(false);
   };
 
-  const handleAuthError = (error: AuthErrorType) => {
+  const handleAuthError = (error: AuthError) => {
     console.log(error.code);
-    if (error.code === "auth/popup-closed-by-user") {
-      return;
-    }
-    if (error.code === "auth/invalid-credential") {
-      setError("Invalid Email or Password");
-    } else {
-      setError("Something went wrong");
+    switch (error.code) {
+      case AuthErrorCodes.POPUP_CLOSED_BY_USER:
+        return;
+      case AuthErrorCodes.INVALID_LOGIN_CREDENTIALS:
+        setError("Invalid Email or Password");
+        break;
+      default:
+        setError("Something went wrong");
     }
     if (error.code) {
       setAuthErrorVisible(true);
@@ -104,7 +105,8 @@ const SignInForm = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
-      handleAuthError(error as AuthErrorType);
+      handleAuthError(error as AuthError);
+    } finally {
       setLoading(false);
     }
   };
@@ -136,6 +138,8 @@ const SignInForm = () => {
           required
           name="password"
           value={password}
+          minLength={6}
+          onForgot={() => setModalOpen(true)}
         />
         <Button
           type="submit"
@@ -156,8 +160,11 @@ const SignInForm = () => {
         </Button>
       </SignInFormStyled>
       <AnimatePresence>
-        {isAuthErrorVisible && <AuthError error={error!} key="toast" />}
+        {isAuthErrorVisible && <AuthErrorPopup error={error!} key="toast" />}
       </AnimatePresence>
+      {isModalOpen && (
+        <ForgotPasswordModal onClose={() => setModalOpen(false)} />
+      )}
     </MotionSingInFormContainer>
   );
 };

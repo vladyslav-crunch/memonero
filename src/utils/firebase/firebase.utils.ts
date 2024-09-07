@@ -7,6 +7,8 @@ import {
   User,
   signInWithEmailAndPassword,
   signOut,
+  sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -108,4 +110,9 @@ export const getUserInfoFromDB = async (userAuth: User | undefined) => {
   if (userSnapshot.exists()) {
     return userSnapshot.data();
   }
+};
+
+export const sendPasswordResetLinkToEmail = async (email: string) => {
+  if (!email) return;
+  return await sendPasswordResetEmail(auth, email);
 };

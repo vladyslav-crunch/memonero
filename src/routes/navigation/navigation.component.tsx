@@ -47,7 +47,7 @@ const Navigation = () => {
           <NavLink to="/support">Support</NavLink>
         </NavLinkContainer>
         <div>
-          <p>You are logged as: {user?.email}</p>
+          <p>You are logged as: {user?.displayName}</p>
         </div>
       </NavigationContainer>
       <OutletWrapper>

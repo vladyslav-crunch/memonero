@@ -33,6 +33,9 @@ type SignInFormStyledProps = {
 };
 
 export const SignUpFormStyled = styled.form<SignInFormStyledProps>`
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   div:nth-child(2) input {
     border: ${({ error }) =>
       error === "This email is already in use" || error === "Invalid email"
@@ -61,7 +64,7 @@ export const CheckBoxContainer = styled.label`
   align-items: center;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 
   .checkbox-label {
     margin-top: 3px;

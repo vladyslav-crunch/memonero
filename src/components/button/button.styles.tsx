@@ -61,7 +61,33 @@ export const SingInGoogle = styled(BaseButton)`
   color: #6e6e6e;
 `;
 
+export const BlackButton = styled(BaseButton)`
+  border: none;
+  background-color: #1a0933;
+  color: #fff;
+  font-weight: 500;
+  &:disabled {
+    background-color: #434343;
+  }
+`;
+
 export const ButtonSpinner = styled(SpinnerContainer)`
   width: 35px;
   height: 35px;
+  display: inline-block;
+  border: 3px solid #5e5e5e;
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
 `;
