@@ -75,7 +75,7 @@ export const ButtonSpinner = styled(SpinnerContainer)`
   width: 35px;
   height: 35px;
   display: inline-block;
-  border: 3px solid #5e5e5e;
+  border: 3px solid #d8d7d7;
   border-radius: 50%;
   border-top-color: #fff;
   animation: spin 1s ease-in-out infinite;
