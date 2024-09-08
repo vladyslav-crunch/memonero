@@ -94,9 +94,8 @@ const ResetPasswordForm = () => {
         return;
       }
       await confirmPasswordReset(auth, oobCode, password);
-      setAuthErrorVisible(true);
       resetFormFields();
-      //   navigate("/sign-in");
+      navigate("/sign-in");
     } catch (error) {
       handleAuthError(error as AuthError);
     } finally {

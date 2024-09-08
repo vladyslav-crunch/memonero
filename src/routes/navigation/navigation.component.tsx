@@ -12,6 +12,7 @@ import { auth, getUserInfoFromDB } from "../../utils/firebase/firebase.utils";
 
 import { useEffect, useState } from "react";
 import { User } from "firebase/auth";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Navigation = () => {
   const [user, setUser] = useState<User>();
@@ -49,6 +50,7 @@ const Navigation = () => {
         <div>
           <p>You are logged as: {user?.displayName}</p>
         </div>
+        <button onClick={signOutUser}>Sign out</button>
       </NavigationContainer>
       <OutletWrapper>
         <Outlet />
