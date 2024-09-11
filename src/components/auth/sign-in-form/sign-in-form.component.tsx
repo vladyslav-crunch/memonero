@@ -1,17 +1,17 @@
-import { signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
+import { signInWithGooglePopup } from "../../../utils/firebase/firebase.utils";
 import {
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
-} from "../../utils/firebase/firebase.utils";
+} from "../../../utils/firebase/firebase.utils";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { SignInFormContainer, SignInFormStyled } from "./sign-in-form.styles";
-import FormInput from "../form-input/form-input.component";
-import EmailIcon from "../../assets/sign-in-icons/Email.svg";
-import KeyIcon from "../../assets/sign-in-icons/key.svg";
-import Button from "../button/button.component";
-import { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { ReactComponent as GoogleIcon } from "../../assets/sign-in-icons/google.svg";
+import FormInput from "../../ui/form-input/form-input.component";
+import EmailIcon from "../../../assets/sign-in-icons/Email.svg";
+import KeyIcon from "../../../assets/sign-in-icons/key.svg";
+import Button from "../../ui/button/button.component";
+import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
+import { ReactComponent as GoogleIcon } from "../../../assets/sign-in-icons/google.svg";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
@@ -29,13 +29,13 @@ const container = {
 
 let TimeoutCounter: NodeJS.Timeout | undefined;
 
+const defaultFormFields = {
+  email: "",
+  password: "",
+};
+
 const SignInForm = () => {
   const navigate = useNavigate();
-
-  const defaultFormFields = {
-    email: "",
-    password: "",
-  };
 
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
@@ -47,14 +47,15 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const logGoogleUser = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const loginGoogleUser = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
     try {
       const user = await signInWithGooglePopup();
       await createUserDocumentFromAuth(user);
       navigate("/");
     } catch (error) {
-      console.log(error);
       handleAuthError(error as AuthError);
     }
   };
@@ -67,7 +68,6 @@ const SignInForm = () => {
   };
 
   const handleAuthError = (error: AuthError) => {
-    console.log(error.code);
     switch (error.code) {
       case AuthErrorCodes.POPUP_CLOSED_BY_USER:
         return;
@@ -95,16 +95,12 @@ const SignInForm = () => {
       return;
     }
     try {
-      const userCred = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      await signInAuthUserWithEmailAndPassword(email, password);
 
       setLoading(false);
       resetFormFields();
       navigate("/");
     } catch (error) {
-      console.log(error);
       handleAuthError(error as AuthError);
     } finally {
       setLoading(false);
@@ -139,7 +135,7 @@ const SignInForm = () => {
           name="password"
           value={password}
           minLength={6}
-          onForgot={() => setModalOpen(true)}
+          adornment={() => setModalOpen(true)}
         />
         <Button
           type="submit"
@@ -153,7 +149,7 @@ const SignInForm = () => {
         </p>
         <Button
           buttonType={BUTTON_TYPE_CLASSES.googleSignIn}
-          onClick={logGoogleUser}
+          onClick={loginGoogleUser}
         >
           <GoogleIcon />
           Sign in with Google

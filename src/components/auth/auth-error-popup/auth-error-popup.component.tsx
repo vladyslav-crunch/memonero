@@ -1,7 +1,7 @@
 import { AuthErrorContainer } from "./auth-error-popup.styles";
 import { FC } from "react";
 import { motion } from "framer-motion";
-import errorIcon from "../../assets/sign-in-icons/error.svg";
+import errorIcon from "../../../assets/sign-in-icons/error.svg";
 
 const MotionAuthErrorContainer = motion(AuthErrorContainer);
 

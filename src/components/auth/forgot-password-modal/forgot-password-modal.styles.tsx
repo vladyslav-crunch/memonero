@@ -17,8 +17,7 @@ export const ModalWindowWrapper = styled.div`
   padding: 50px;
   background-color: #fff7f0;
   border-radius: 20px;
-  z-index: 1000;
-
+  z-index: 1000;    
   form {
     display: flex;
     flex-direction: column;
@@ -40,7 +39,7 @@ export const ModalWindowWrapper = styled.div`
   }
   input {
     border: 1px solid #b5afaf;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
   input:focus {
     border: 1px solid #b5afaf;

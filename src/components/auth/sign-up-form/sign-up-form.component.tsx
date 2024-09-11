@@ -1,23 +1,20 @@
 import { ChangeEvent, useState, FormEvent } from "react";
-import EmailIcon from "../../assets/sign-up-icons/Email.svg";
-import UsernameIcon from "../../assets/sign-up-icons/Username.svg";
-import PasswordIcon from "../../assets/sign-up-icons/Password.svg";
+import EmailIcon from "../../../assets/sign-up-icons/Email.svg";
+import UsernameIcon from "../../../assets/sign-up-icons/Username.svg";
+import PasswordIcon from "../../../assets/sign-up-icons/Password.svg";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+} from "../../../utils/firebase/firebase.utils";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
-import {
-  SignUpFormStyled,
-  SignUpFormContainer,
-  CheckBoxContainer,
-} from "./sign-up-form.styles";
-import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
-import { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import { SignUpFormStyled, SignUpFormContainer } from "./sign-up-form.styles";
+import FormInput from "../../ui/form-input/form-input.component";
+import Button from "../../ui/button/button.component";
+import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
+import Checkbox from "../../ui/checkbox/checkbox.component";
 
 const MotionSingUpFormContainer = motion(SignUpFormContainer);
 
@@ -36,6 +33,7 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 let TimeoutCounter: NodeJS.Timeout | undefined;
 
 const SignUpForm = () => {
@@ -54,7 +52,6 @@ const SignUpForm = () => {
   };
 
   const handleAuthError = (error: AuthError) => {
-    console.log(error.code);
     switch (error.code) {
       case AuthErrorCodes.EMAIL_EXISTS:
         setError("This email is already in use");
@@ -170,15 +167,11 @@ const SignUpForm = () => {
           value={confirmPassword}
           minLength={6}
         />
-        <CheckBoxContainer>
-          <span className="checkbox-label">I accept terms of use</span>
-          <input
-            type="checkbox"
-            checked={isCheckboxChecked}
-            onChange={handleCheckboxChange}
-          />
-          <span className="checkmark"></span>
-        </CheckBoxContainer>
+        <Checkbox
+          label="I accept terms of use"
+          checked={isCheckboxChecked}
+          onChange={handleCheckboxChange}
+        />
         <Button
           buttonType={BUTTON_TYPE_CLASSES.sign}
           type="submit"

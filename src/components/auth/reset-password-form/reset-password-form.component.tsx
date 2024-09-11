@@ -1,17 +1,17 @@
 import { ChangeEvent, useState, FormEvent } from "react";
-import PasswordIcon from "../../assets/sign-up-icons/Password.svg";
+import PasswordIcon from "../../../assets/sign-up-icons/Password.svg";
 import { AuthError, AuthErrorCodes, confirmPasswordReset } from "firebase/auth";
 import {
   ResetPasswordFormContainer,
   ResetPasswordFormStyled,
 } from "./reset-password-form.styles";
-import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
-import { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import FormInput from "../../ui/form-input/form-input.component";
+import Button from "../../ui/button/button.component";
+import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
-import { auth } from "../../utils/firebase/firebase.utils";
+import { auth } from "../../../utils/firebase/firebase.utils";
 
 const MotionSingUpFormContainer = motion(ResetPasswordFormContainer);
 
@@ -28,6 +28,7 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 let TimeoutCounter: NodeJS.Timeout | undefined;
 
 const ResetPasswordForm = () => {
@@ -46,7 +47,6 @@ const ResetPasswordForm = () => {
   };
 
   const handleAuthError = (error: AuthError) => {
-    console.log(error.code);
     switch (error.code) {
       case AuthErrorCodes.EXPIRED_OOB_CODE:
         setError("Reset link is invalid or expired");
@@ -81,6 +81,7 @@ const ResetPasswordForm = () => {
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
+      setAuthErrorVisible(true);
       setLoading(false);
       return;
     }
