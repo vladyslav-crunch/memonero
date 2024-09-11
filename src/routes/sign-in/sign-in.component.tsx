@@ -1,27 +1,11 @@
-import SignInForm from "../../components/sign-in-form/sign-in-form.component";
-import { ReactComponent as MemoneroLogo } from "../../assets/sign-in-icons/logo.svg";
-import {
-  SignInContainer,
-  SignInHeader,
-  SignInMainContent,
-  SignInCardsContainer,
-} from "./sign-in.styles";
-import AuthCards from "../../components/auth-cards/authCard.component";
+import AuthPage from "../../components/auth/auth-page/auth-page.component";
+import SignInForm from "../../components/auth/sign-in-form/sign-in-form.component";
 
 const SignIn = () => {
   return (
-    <SignInContainer>
-      <SignInHeader>
-        <MemoneroLogo />
-        <span>Memonero</span>
-      </SignInHeader>
-      <SignInMainContent>
-        <SignInForm />
-        <SignInCardsContainer>
-          <AuthCards />
-        </SignInCardsContainer>
-      </SignInMainContent>
-    </SignInContainer>
+    <AuthPage>
+      <SignInForm />
+    </AuthPage>
   );
 };
 

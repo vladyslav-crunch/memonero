@@ -3,16 +3,16 @@ import {
   ModalWindowOverlay,
   ModalWindowWrapper,
 } from "./forgot-password-modal.styles";
-import FormInput from "../form-input/form-input.component";
+import FormInput from "../../ui/form-input/form-input.component";
 import ReactDOM from "react-dom";
-import EmailIcon from "../../assets/sign-in-icons/Email.svg";
-import Button from "../button/button.component";
-import { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { sendPasswordResetLinkToEmail } from "../../utils/firebase/firebase.utils";
+import EmailIcon from "../../../assets/sign-in-icons/Email.svg";
+import Button from "../../ui/button/button.component";
+import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
+import { sendPasswordResetLinkToEmail } from "../../../utils/firebase/firebase.utils";
 import { useState } from "react";
 import { ChangeEvent } from "react";
 import { AuthErrorCodes, AuthError } from "firebase/auth";
-import closeButton from "../../assets/sign-in-icons/material-symbols_close.svg";
+import closeButton from "../../../assets/sign-in-icons/material-symbols_close.svg";
 import { motion } from "framer-motion";
 
 const MotionModalWindowWrapper = motion(ModalWindowWrapper);
@@ -26,8 +26,8 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({ onClose }) => {
   const [email, setEmail] = useState<string>();
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
+
   const handleAuthError = (error: AuthError) => {
-    console.log(error.code);
     switch (error.code) {
       case AuthErrorCodes.INVALID_EMAIL:
         setError("Invalid email address");
@@ -50,7 +50,6 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({ onClose }) => {
       setIsLinkSent(true);
       setError("");
     } catch (error) {
-      console.log("Error: ", error);
       handleAuthError(error as AuthError);
     } finally {
       setIsLoading(false);
@@ -77,6 +76,7 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({ onClose }) => {
             placeholder="Email"
             type="email"
             readOnly={isLinkSent}
+            required
           />
           <p
             className="error"

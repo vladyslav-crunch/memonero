@@ -19,7 +19,6 @@ const Navigation = () => {
 
   const setUserFromDataBase = async (user: User) => {
     const UserFromDB = await getUserInfoFromDB(user);
-    console.log(UserFromDB);
     const newUser = { ...user, displayName: UserFromDB?.displayName };
     setUser(newUser);
   };

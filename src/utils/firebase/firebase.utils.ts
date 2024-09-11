@@ -8,7 +8,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
-  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -78,9 +77,7 @@ export const createUserDocumentFromAuth = async (
         createdAt,
         ...additionInformation,
       });
-    } catch (error) {
-      console.log("error creating the user", error);
-    }
+    } catch (error) {}
   }
   return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
@@ -104,8 +101,10 @@ export const signInAuthUserWithEmailAndPassword = async (
 export const signOutUser = async () => signOut(auth);
 
 export const getUserInfoFromDB = async (userAuth: User | undefined) => {
-  // @ts-ignore
-  const userDocRef = doc(db, "users", userAuth?.uid);
+  if (!userAuth) {
+    return;
+  }
+  const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
   if (userSnapshot.exists()) {
     return userSnapshot.data();
