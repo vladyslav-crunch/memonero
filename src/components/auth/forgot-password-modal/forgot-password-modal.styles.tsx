@@ -57,5 +57,9 @@ export const ModalWindowWrapper = styled.div`
     top: 20px;
     right: 20px;
     cursor: pointer;
-  }
+  } 
+  @media (max-width: 1100px) {  
+    padding: 25px;
+      min-width: 320px;
+  } 
 `;

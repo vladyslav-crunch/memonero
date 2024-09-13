@@ -4,6 +4,9 @@ export const HeaderContainer = styled.div`
   a {
     display: flex;
     align-items: center;
+    @media (max-width: 1100px) {
+      justify-content: center;
+    }
     text-decoration: none;
   }
   span {

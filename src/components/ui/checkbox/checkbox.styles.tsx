@@ -32,13 +32,13 @@ export const CheckBoxContainer = styled.label`
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #fcfcfc;
+    background-color: #fff7f0;
   }
 
   &:hover input ~ .checkmark {
     background-color: #eee;
   }
-
+  
   input:checked ~ .checkmark {
     background-color: #f39d8e;
   }

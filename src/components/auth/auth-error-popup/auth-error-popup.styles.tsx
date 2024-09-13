@@ -11,12 +11,13 @@ export const AuthErrorContainer = styled.div`
   border-radius: 13px;
   position: absolute;
   max-width: 350px;
-  top: 25px;
+  top: 33px;
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
-
+  @media (max-width: 1100px) {
+  }
   p {
     margin-top: 0 !important;
   }

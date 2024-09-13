@@ -26,6 +26,9 @@ export const AuthCardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  @media (max-width: 1100px) {
+    display: none;
+  }
 `;
 
 export const AuthCard = styled.div<AuthCardProps>`

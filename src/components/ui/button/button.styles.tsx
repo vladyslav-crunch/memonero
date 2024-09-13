@@ -14,6 +14,7 @@ export const BaseButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
 `;
 
 export const SignButton = styled(BaseButton)`
@@ -59,6 +60,7 @@ export const SingInGoogle = styled(BaseButton)`
   background-color: #fff7f0;
   font-weight: 500;
   color: #6e6e6e;
+
 `;
 
 export const BlackButton = styled(BaseButton)`

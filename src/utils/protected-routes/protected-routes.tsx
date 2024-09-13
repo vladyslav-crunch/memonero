@@ -21,7 +21,7 @@ const ProtectedRoutes: FC<ProtectedRoutesProps>= ({type}) => {
   }, []);
 
   if (loading) {
-    return <>Loading...</>;
+    return <></>;
   }
   if(type === "Dashboard"){
     return user ? <Outlet /> : <Navigate to="/sign-in" />;
@@ -32,3 +32,4 @@ const ProtectedRoutes: FC<ProtectedRoutesProps>= ({type}) => {
 };
 
 export default ProtectedRoutes;
+

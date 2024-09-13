@@ -1,27 +1,15 @@
 import { ChangeEvent, useState, FormEvent } from "react";
 import PasswordIcon from "../../../assets/sign-up-icons/Password.svg";
 import { AuthError, AuthErrorCodes, confirmPasswordReset } from "firebase/auth";
-import {
-  ResetPasswordFormContainer,
-  ResetPasswordFormStyled,
-} from "./reset-password-form.styles";
+import { ResetPasswordFormStyled } from "./reset-password-form.styles";
 import FormInput from "../../ui/form-input/form-input.component";
 import Button from "../../ui/button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
 import { useNavigate, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
 import { auth } from "../../../utils/firebase/firebase.utils";
-
-const MotionSingUpFormContainer = motion(ResetPasswordFormContainer);
-
-const container = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-  },
-};
+import AuthFormContainerComponent from "../auth-form-container/auth-form-container.component";
 
 const defaultFormFields = {
   password: "",
@@ -105,12 +93,7 @@ const ResetPasswordForm = () => {
   };
 
   return (
-    <MotionSingUpFormContainer
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      transition={{ duration: 1, delay: 0.2 }}
-    >
+    <AuthFormContainerComponent>
       <h2>Reset your password</h2>
       <ResetPasswordFormStyled onSubmit={handleSubmit} error={error}>
         <FormInput
@@ -144,7 +127,7 @@ const ResetPasswordForm = () => {
           {isAuthErrorVisible && <AuthErrorPopup error={error!} key="toast" />}
         </AnimatePresence>
       </ResetPasswordFormStyled>
-    </MotionSingUpFormContainer>
+    </AuthFormContainerComponent>
   );
 };
 

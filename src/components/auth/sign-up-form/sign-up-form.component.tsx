@@ -7,24 +7,15 @@ import {
   createUserDocumentFromAuth,
 } from "../../../utils/firebase/firebase.utils";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
-import { SignUpFormStyled, SignUpFormContainer } from "./sign-up-form.styles";
+import { SignUpFormStyled } from "./sign-up-form.styles";
 import FormInput from "../../ui/form-input/form-input.component";
 import Button from "../../ui/button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
 import { Link, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
 import Checkbox from "../../ui/checkbox/checkbox.component";
-
-const MotionSingUpFormContainer = motion(SignUpFormContainer);
-
-const container = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-  },
-};
+import AuthFormContainerComponent from "../auth-form-container/auth-form-container.component";
 
 const defaultFormFields = {
   displayName: "",
@@ -104,7 +95,7 @@ const SignUpForm = () => {
     try {
       const userCred = await createAuthUserWithEmailAndPassword(
         email,
-        password
+        password,
       );
       if (userCred) {
         const { user } = userCred;
@@ -120,12 +111,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <MotionSingUpFormContainer
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      transition={{ duration: 1, delay: 0.2 }}
-    >
+    <AuthFormContainerComponent>
       <h2>Create your account</h2>
       <SignUpFormStyled onSubmit={handleSubmit} error={error}>
         <FormInput
@@ -186,7 +172,7 @@ const SignUpForm = () => {
           {isAuthErrorVisible && <AuthErrorPopup error={error!} key="toast" />}
         </AnimatePresence>
       </SignUpFormStyled>
-    </MotionSingUpFormContainer>
+    </AuthFormContainerComponent>
   );
 };
 

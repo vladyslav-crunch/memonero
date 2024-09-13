@@ -1,11 +1,13 @@
 import styled from "styled-components";
 export const ResetPasswordFormContainer = styled.div`
   width: 520px;
-
   h2 {
     margin-bottom: 15px;
     font-size: 26px;
     color: #1a0933;
+    @media (max-width: 1100px) {
+        text-align: center;
+    }
   }
   p {
     margin-top: 10px;
@@ -26,6 +28,7 @@ export const ResetPasswordFormContainer = styled.div`
   div + label {
     margin-top: 5px;
   }
+
 `;
 
 type SignInFormStyledProps = {

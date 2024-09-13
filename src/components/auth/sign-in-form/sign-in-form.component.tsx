@@ -1,11 +1,11 @@
-import { signInWithGooglePopup } from "../../../utils/firebase/firebase.utils";
 import {
+  signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../../utils/firebase/firebase.utils";
-import { AuthError, AuthErrorCodes } from "firebase/auth";
-import { useState, ChangeEvent, FormEvent } from "react";
-import { SignInFormContainer, SignInFormStyled } from "./sign-in-form.styles";
+import { AuthError, AuthErrorCodes, getRedirectResult } from "firebase/auth";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { SignInFormStyled } from "./sign-in-form.styles";
 import FormInput from "../../ui/form-input/form-input.component";
 import EmailIcon from "../../../assets/sign-in-icons/Email.svg";
 import KeyIcon from "../../../assets/sign-in-icons/key.svg";
@@ -13,19 +13,11 @@ import Button from "../../ui/button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
 import { ReactComponent as GoogleIcon } from "../../../assets/sign-in-icons/google.svg";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordModal from "../forgot-password-modal/forgot-password-modal.component";
-const MotionSingInFormContainer = motion(SignInFormContainer);
-
-const container = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-  },
-};
+import AuthFormContainerComponent from "../auth-form-container/auth-form-container.component";
 
 let TimeoutCounter: NodeJS.Timeout | undefined;
 
@@ -36,7 +28,6 @@ const defaultFormFields = {
 
 const SignInForm = () => {
   const navigate = useNavigate();
-
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
   const [error, setError] = useState<string>();
@@ -48,7 +39,7 @@ const SignInForm = () => {
   };
 
   const loginGoogleUser = async (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     event.preventDefault();
     try {
@@ -108,12 +99,7 @@ const SignInForm = () => {
   };
 
   return (
-    <MotionSingInFormContainer
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      transition={{ duration: 1, delay: 0.2 }}
-    >
+    <AuthFormContainerComponent>
       <h2>Welcome Back!</h2>
       <SignInFormStyled onSubmit={handleSubmit} error={error}>
         <FormInput
@@ -142,7 +128,7 @@ const SignInForm = () => {
           buttonType={BUTTON_TYPE_CLASSES.sign}
           isLoading={isLoading}
         >
-          Sign in
+          Sign In
         </Button>
         <p>
           Don't have an account? <Link to={"/sign-up"}>Sign Up</Link>
@@ -161,7 +147,7 @@ const SignInForm = () => {
       {isModalOpen && (
         <ForgotPasswordModal onClose={() => setModalOpen(false)} />
       )}
-    </MotionSingInFormContainer>
+    </AuthFormContainerComponent>
   );
 };
 

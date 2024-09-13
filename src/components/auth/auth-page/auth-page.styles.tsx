@@ -7,6 +7,7 @@ export const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+    
   &::after {
     content: "";
     z-index: -2;
@@ -38,4 +39,7 @@ export const AuthMainContent = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  @media (max-width: 1100px) {
+    justify-content: center;
+  }
 `;

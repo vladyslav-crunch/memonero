@@ -25,13 +25,15 @@ export const FormInputContainer = styled.div<FormInputContainerProps>`
 
 export const FormInputStyled = styled.input`
   padding-left: 50px;
-  height: 60px;
+  height: 55px;
   width: 100%;
   border: none;
   border-radius: 12px;
   background-color: #fff7f0;
   font-size: 16px;
   font-weight: 200;
+
+;
   &:focus {
     border: 2px solid #ed9e8f;
     outline: none;
