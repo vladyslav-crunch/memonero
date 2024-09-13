@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/memonero/static/css/main.ef4eb634.css",
+    "main.js": "/memonero/static/js/main.2f7d1550.js",
+    "static/js/453.b7a34af3.chunk.js": "/memonero/static/js/453.b7a34af3.chunk.js",
+    "static/media/google.svg": "/memonero/static/media/google.ab403f220c9eab554bfac4ed7818a535.svg",
+    "static/media/error.svg": "/memonero/static/media/error.275d89c36ca2146c1de3ded0908af52a.svg",
+    "static/media/Password.svg": "/memonero/static/media/Password.f90dd49bc9ea6d90c2d217bba8218a39.svg",
+    "static/media/key.svg": "/memonero/static/media/key.f3284c1aa25fc4ae88e855583726321e.svg",
+    "static/media/logo.svg": "/memonero/static/media/logo.32f66706c785b2fec5c4e6beac602555.svg",
+    "index.html": "/memonero/index.html",
+    "static/media/Email.svg": "/memonero/static/media/Email.72a0729642dd2697115c76087d8859ac.svg",
+    "static/media/Username.svg": "/memonero/static/media/Username.b81151eafe966059d55d74c1345a6aec.svg",
+    "static/media/material-symbols_close.svg": "/memonero/static/media/material-symbols_close.afa8a1ffb1f4610733c3b073b230e4b2.svg",
+    "main.ef4eb634.css.map": "/memonero/static/css/main.ef4eb634.css.map",
+    "main.2f7d1550.js.map": "/memonero/static/js/main.2f7d1550.js.map",
+    "453.b7a34af3.chunk.js.map": "/memonero/static/js/453.b7a34af3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef4eb634.css",
+    "static/js/main.2f7d1550.js"
+  ]
+}
