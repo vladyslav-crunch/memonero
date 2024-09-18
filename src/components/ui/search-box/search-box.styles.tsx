@@ -48,7 +48,7 @@ export const SearchBoxContainer = styled.div`
     }
   }
 
-  &:has(input:focus) {
+  &:has(input:focus, input:not(:placeholder-shown)) {
     justify-content: start;
     width: 350px;
     border-radius: 50px;

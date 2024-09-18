@@ -6,18 +6,22 @@ import {
   NavLink,
   NavigationLogo,
   OutletWrapper,
+  UserSection,
+  UserWithoutPicture,
 } from "./navigation.style";
 import { ReactComponent as MemoneroLogo } from "../../assets/icons/logo.svg";
 import { auth, getUserInfoFromDB } from "../../utils/firebase/firebase.utils";
 import { ReactComponent as DashboardIcon } from "../../assets/nav-icons/dashboard-icon.svg";
 import { ReactComponent as BoardsIcon } from "../../assets/nav-icons/boards-icon.svg";
+import { ReactComponent as DrowdownIcon } from "../../assets/nav-icons/dropdown-icon.svg";
 import { useEffect, useState } from "react";
 import { User } from "firebase/auth";
-import { signOutUser } from "../../utils/firebase/firebase.utils";
 import SearhBox from "../../components/ui/search-box/search-box.component";
+import DropdownMenuComponent from "../../components/dropdown-menu/dropdown-menu.component";
 
 const Navigation = () => {
   const [user, setUser] = useState<User>();
+  const [isDropdownMenuOpen, setDropdownMenuOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const setUserFromDataBase = async (user: User) => {
     const UserFromDB = await getUserInfoFromDB(user);
@@ -50,13 +54,23 @@ const Navigation = () => {
         </NavigationLogo>
         <NavLinkContainer>
           <SearhBox onSearch={setSearchValue} />
-          <NavLink to="/setting">
+          <NavLink to="/*">
             <BoardsIcon id={"boardicon"} />
           </NavLink>
-          <NavLink to="/support">
+          <NavLink to="/">
             <DashboardIcon />
           </NavLink>
-          <button onClick={signOutUser}>Sign out</button>
+          <UserSection onClick={() => setDropdownMenuOpen(!isDropdownMenuOpen)}>
+            {user?.photoURL ? (
+              <img src={user?.photoURL || ""} alt="profile picture" />
+            ) : (
+              <UserWithoutPicture />
+            )}
+            <DrowdownIcon />
+          </UserSection>
+          {isDropdownMenuOpen && (
+            <DropdownMenuComponent onOverlay={setDropdownMenuOpen} />
+          )}
         </NavLinkContainer>
       </NavigationContainer>
       <OutletWrapper>

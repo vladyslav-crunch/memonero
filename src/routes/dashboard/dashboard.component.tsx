@@ -1,9 +1,9 @@
 import Decks from "../../components/decks/decks.component";
 import { useOutletContext } from "react-router-dom";
 
-const Home = () => {
+const Dashboard = () => {
   const x: string = useOutletContext();
-  console.log(x);
+  // console.log(x);
   return (
     <>
       <h1>{x}</h1>
@@ -12,4 +12,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

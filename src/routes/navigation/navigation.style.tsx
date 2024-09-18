@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { NavLink as NavLinkRouter } from "react-router-dom";
+import ProfileIcon from "../../assets/nav-icons/profile-icon.svg";
 
 export const AppWrapper = styled.div`
   display: flex;
@@ -20,10 +21,18 @@ export const NavigationContainer = styled.div`
 
 export const NavLinkContainer = styled.div`
   display: flex;
+  z-index: 2;
+
+  img {
+    height: 62px;
+    width: 62px;
+    border-radius: 50%;
+  }
 `;
 
 export const NavigationLogo = styled.div`
   font-size: 20px;
+  z-index: 2;
 
   a {
     display: flex;
@@ -81,6 +90,24 @@ export const NavLink = styled(NavLinkRouter)`
   }
 `;
 
+export const UserSection = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    margin-right: 20px;
+  }
+`;
+
+export const UserWithoutPicture = styled.div`
+  height: 62px;
+  width: 62px;
+  border-radius: 50%;
+  background: url(${ProfileIcon}) no-repeat center #ffe5e0;
+  background-size: 62px;
+  margin-right: 20px;
+`;
 export const OutletWrapper = styled.div`
   margin-top: 30px;
   overflow: auto;
