@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/memonero/static/css/main.ef4eb634.css",
-    "main.js": "/memonero/static/js/main.eb1b2ff2.js",
+    "main.js": "/memonero/static/js/main.771b1abf.js",
     "static/js/453.b7a34af3.chunk.js": "/memonero/static/js/453.b7a34af3.chunk.js",
     "static/media/google-icon.svg": "/memonero/static/media/google-icon.ab403f220c9eab554bfac4ed7818a535.svg",
     "static/media/boards-icon.svg": "/memonero/static/media/boards-icon.450346f2baecd8608cc26d7a24dbf50b.svg",
@@ -15,11 +15,11 @@
     "static/media/search-icon.svg": "/memonero/static/media/search-icon.c79668e1d53e68c584b840af8f690aec.svg",
     "static/media/close-icon.svg": "/memonero/static/media/close-icon.afa8a1ffb1f4610733c3b073b230e4b2.svg",
     "main.ef4eb634.css.map": "/memonero/static/css/main.ef4eb634.css.map",
-    "main.eb1b2ff2.js.map": "/memonero/static/js/main.eb1b2ff2.js.map",
+    "main.771b1abf.js.map": "/memonero/static/js/main.771b1abf.js.map",
     "453.b7a34af3.chunk.js.map": "/memonero/static/js/453.b7a34af3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ef4eb634.css",
-    "static/js/main.eb1b2ff2.js"
+    "static/js/main.771b1abf.js"
   ]
 }
