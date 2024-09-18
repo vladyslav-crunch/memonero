@@ -5,14 +5,14 @@ import {
 } from "./forgot-password-modal.styles";
 import FormInput from "../../ui/form-input/form-input.component";
 import ReactDOM from "react-dom";
-import EmailIcon from "../../../assets/sign-in-icons/Email.svg";
+import EmailIcon from "../../../assets/auth-icons/email-icon.svg";
 import Button from "../../ui/button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
 import { sendPasswordResetLinkToEmail } from "../../../utils/firebase/firebase.utils";
 import { useState } from "react";
 import { ChangeEvent } from "react";
 import { AuthErrorCodes, AuthError } from "firebase/auth";
-import closeButton from "../../../assets/sign-in-icons/material-symbols_close.svg";
+import closeButton from "../../../assets/auth-icons/close-icon.svg";
 import { motion } from "framer-motion";
 
 const MotionModalWindowWrapper = motion(ModalWindowWrapper);
@@ -97,7 +97,7 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({ onClose }) => {
         </span>
       </MotionModalWindowWrapper>
     </>,
-    document.getElementById("portal") as HTMLElement
+    document.getElementById("portal") as HTMLElement,
   );
 };
 

@@ -1,7 +1,7 @@
 import { AuthErrorContainer } from "./auth-error-popup.styles";
 import { FC } from "react";
 import { motion } from "framer-motion";
-import errorIcon from "../../../assets/sign-in-icons/error.svg";
+import errorIcon from "../../../assets/auth-icons/error-icon.svg";
 import ReactDOM from "react-dom";
 
 const MotionAuthErrorContainer = motion(AuthErrorContainer);
@@ -20,8 +20,9 @@ const AuthErrorPopup: FC<AuthErrorProps> = ({ error }) => {
     >
       <img src={errorIcon} alt="Error icon" />
       <p>{error}</p>
-    </MotionAuthErrorContainer>, document.getElementById("portal") as HTMLElement
-  )
+    </MotionAuthErrorContainer>,
+    document.getElementById("portal") as HTMLElement,
+  );
 };
 
 export default AuthErrorPopup;

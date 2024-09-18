@@ -1,22 +1,24 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import {
   AppWrapper,
   NavigationContainer,
   NavLinkContainer,
   NavLink,
-  NavigationTitle,
+  NavigationLogo,
   OutletWrapper,
 } from "./navigation.style";
-
+import { ReactComponent as MemoneroLogo } from "../../assets/icons/logo.svg";
 import { auth, getUserInfoFromDB } from "../../utils/firebase/firebase.utils";
-
+import { ReactComponent as DashboardIcon } from "../../assets/nav-icons/dashboard-icon.svg";
+import { ReactComponent as BoardsIcon } from "../../assets/nav-icons/boards-icon.svg";
 import { useEffect, useState } from "react";
 import { User } from "firebase/auth";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+import SearhBox from "../../components/ui/search-box/search-box.component";
 
 const Navigation = () => {
   const [user, setUser] = useState<User>();
-
+  const [searchValue, setSearchValue] = useState("");
   const setUserFromDataBase = async (user: User) => {
     const UserFromDB = await getUserInfoFromDB(user);
     const newUser = { ...user, displayName: UserFromDB?.displayName };
@@ -40,19 +42,25 @@ const Navigation = () => {
   return (
     <AppWrapper>
       <NavigationContainer>
-        <NavigationTitle>Memonero</NavigationTitle>
+        <NavigationLogo>
+          <Link to={"/"}>
+            <MemoneroLogo />
+            <span>Memonero</span>
+          </Link>
+        </NavigationLogo>
         <NavLinkContainer>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/setting">Setting</NavLink>
-          <NavLink to="/support">Support</NavLink>
+          <SearhBox onSearch={setSearchValue} />
+          <NavLink to="/setting">
+            <BoardsIcon id={"boardicon"} />
+          </NavLink>
+          <NavLink to="/support">
+            <DashboardIcon />
+          </NavLink>
+          <button onClick={signOutUser}>Sign out</button>
         </NavLinkContainer>
-        <div>
-          <p>You are logged as: {user?.displayName}</p>
-        </div>
-        <button onClick={signOutUser}>Sign out</button>
       </NavigationContainer>
       <OutletWrapper>
-        <Outlet />
+        <Outlet context={searchValue} />
       </OutletWrapper>
     </AppWrapper>
   );

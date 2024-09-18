@@ -1,7 +1,8 @@
 import { HeaderContainer } from "./header.styles";
-import { ReactComponent as MemoneroLogo } from "../../assets/sign-in-icons/logo.svg";
+import { ReactComponent as MemoneroLogo } from "../../assets/icons/logo.svg";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+
 const Header = () => {
   return (
     <>

@@ -1,5 +1,6 @@
-import { AuthCard, AuthCardsContainer } from "./authCards.styles";
+import { AuthCard, AuthCardsContainer } from "./auth-cards.styles";
 import { motion } from "framer-motion";
+
 const MotionAuthCard = motion(AuthCard);
 const MotionAuthCardContainer = motion(AuthCardsContainer);
 

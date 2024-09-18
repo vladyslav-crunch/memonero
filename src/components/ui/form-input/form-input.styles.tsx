@@ -10,6 +10,7 @@ export const FormInputContainer = styled.div<FormInputContainerProps>`
   align-items: center;
   width: 100%;
   height: 100%;
+
   &::after {
     content: "";
     position: absolute;
@@ -31,9 +32,8 @@ export const FormInputStyled = styled.input`
   border-radius: 12px;
   background-color: #fff7f0;
   font-size: 16px;
-  font-weight: 200;
+  font-weight: 300;
 
-;
   &:focus {
     border: 2px solid #ed9e8f;
     outline: none;

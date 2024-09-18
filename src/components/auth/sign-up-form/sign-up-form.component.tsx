@@ -1,7 +1,7 @@
 import { ChangeEvent, useState, FormEvent } from "react";
-import EmailIcon from "../../../assets/sign-up-icons/Email.svg";
-import UsernameIcon from "../../../assets/sign-up-icons/Username.svg";
-import PasswordIcon from "../../../assets/sign-up-icons/Password.svg";
+import EmailIcon from "../../../assets/auth-icons/email-icon.svg";
+import UsernameIcon from "../../../assets/auth-icons/username-icon.svg";
+import PasswordIcon from "../../../assets/auth-icons/password-icon.svg";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,

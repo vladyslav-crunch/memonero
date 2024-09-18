@@ -4,25 +4,40 @@ import { NavLink as NavLinkRouter } from "react-router-dom";
 export const AppWrapper = styled.div`
   display: flex;
   min-height: 100vh;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 30px 40px;
+  height: calc(100vh);
+  position: relative;
 `;
 
 export const NavigationContainer = styled.div`
-  background-color: #ffffffeb;
-  padding: 15px;
   display: flex;
-  flex: 0 0 240px;
-  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const NavLinkContainer = styled.div`
   display: flex;
-  flex-direction: column;
 `;
 
-export const NavigationTitle = styled.div`
-  margin-bottom: 15px;
+export const NavigationLogo = styled.div`
   font-size: 20px;
-  color: #3c3c3c;
+
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #3c3c3c;
+  }
+
+  span {
+    font-size: 24px;
+    color: #1a0933;
+    font-weight: 700;
+    margin-left: 20px;
+  }
 
   font-weight: 500;
 `;
@@ -30,19 +45,46 @@ export const NavLink = styled(NavLinkRouter)`
   text-decoration: none;
   color: #3c3c3c;
   font-weight: 500;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
+  border-radius: 50%;
+  height: 62px;
+  width: 62px;
+  background-color: #ffe5e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  transition: 0.3s;
+
+  #boardicon path {
+    fill: #05020a;
+  }
+
+  svg path {
+    stroke: #05020a;
+  }
 
   &.active {
-    background-color: #ebecec;
+    color: #fff !important;
+    background-color: #05020a;
+
+    #boardicon path {
+      fill: #ffffff;
+    }
+
+    svg path {
+      stroke: #fff;
+    }
   }
-  &:hover {
-    color: #000000;
+
+  &:not(.active):hover {
+    background-color: #e0b8b1;
   }
 `;
 
 export const OutletWrapper = styled.div`
+  margin-top: 30px;
   overflow: auto;
-  height: 100vh;
+  background-color: #ffecdf;
+  border-radius: 15px;
+  height: 100%;
 `;

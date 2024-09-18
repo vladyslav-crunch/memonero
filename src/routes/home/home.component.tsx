@@ -1,9 +1,12 @@
 import Decks from "../../components/decks/decks.component";
+import { useOutletContext } from "react-router-dom";
 
 const Home = () => {
+  const x: string = useOutletContext();
+  console.log(x);
   return (
     <>
-      <h2>Home page</h2>
+      <h1>{x}</h1>
       <Decks />
     </>
   );

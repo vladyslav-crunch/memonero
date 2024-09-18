@@ -1,5 +1,5 @@
 import { ChangeEvent, useState, FormEvent } from "react";
-import PasswordIcon from "../../../assets/sign-up-icons/Password.svg";
+import PasswordIcon from "../../../assets/auth-icons/password-icon.svg";
 import { AuthError, AuthErrorCodes, confirmPasswordReset } from "firebase/auth";
 import { ResetPasswordFormStyled } from "./reset-password-form.styles";
 import FormInput from "../../ui/form-input/form-input.component";
