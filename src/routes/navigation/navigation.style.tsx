@@ -10,6 +10,9 @@ export const AppWrapper = styled.div`
   padding: 30px 40px;
   height: calc(100vh);
   position: relative;
+  @media (max-width: 450px) {
+    padding: 15px 15px;
+  }
 `;
 
 export const NavigationContainer = styled.div`
@@ -27,13 +30,23 @@ export const NavLinkContainer = styled.div`
     height: 62px;
     width: 62px;
     border-radius: 50%;
+    @media (max-width: 450px) {
+      height: 50px;
+      width: 50px;
+    }
   }
 `;
 
 export const NavigationLogo = styled.div`
   font-size: 20px;
   z-index: 2;
-
+  margin-right: 20px;
+  @media (max-width: 450px) {
+    svg {
+      width: 50px;
+      height: 50px;
+    }
+  }
   a {
     display: flex;
     align-items: center;
@@ -46,6 +59,10 @@ export const NavigationLogo = styled.div`
     color: #1a0933;
     font-weight: 700;
     margin-left: 20px;
+    margin-right: 20px;
+    @media (max-width: 1100px) {
+      display: none;
+    }
   }
 
   font-weight: 500;
@@ -57,6 +74,10 @@ export const NavLink = styled(NavLinkRouter)`
   border-radius: 50%;
   height: 62px;
   width: 62px;
+  @media (max-width: 450px) {
+    width: 50px;
+    height: 50px;
+  }
   background-color: #ffe5e0;
   display: flex;
   justify-content: center;
@@ -82,7 +103,6 @@ export const NavLink = styled(NavLinkRouter)`
 
     svg path {
       stroke: #fff;
-    }
   }
 
   &:not(.active):hover {
@@ -107,6 +127,10 @@ export const UserWithoutPicture = styled.div`
   background: url(${ProfileIcon}) no-repeat center #ffe5e0;
   background-size: 62px;
   margin-right: 20px;
+  @media (max-width: 450px) {
+    height: 50px;
+    width: 50px;
+  }
 `;
 export const OutletWrapper = styled.div`
   margin-top: 30px;
@@ -114,4 +138,7 @@ export const OutletWrapper = styled.div`
   background-color: #ffecdf;
   border-radius: 15px;
   height: 100%;
+  @media (max-width: 450px) {
+    margin-top: 20px;
+  }
 `;

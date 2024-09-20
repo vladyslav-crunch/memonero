@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import { User } from "firebase/auth";
 import SearhBox from "../../components/ui/search-box/search-box.component";
 import DropdownMenuComponent from "../../components/dropdown-menu/dropdown-menu.component";
-
+import { useMediaQuery } from "usehooks-ts";
 const Navigation = () => {
   const [user, setUser] = useState<User>();
   const [isDropdownMenuOpen, setDropdownMenuOpen] = useState(false);
@@ -43,6 +43,8 @@ const Navigation = () => {
     return () => unsubscribe();
   }, []);
 
+  const isMobile = useMediaQuery("(max-width: 800px)");
+
   return (
     <AppWrapper>
       <NavigationContainer>
@@ -53,7 +55,7 @@ const Navigation = () => {
           </Link>
         </NavigationLogo>
         <NavLinkContainer>
-          <SearhBox onSearch={setSearchValue} />
+          {!isMobile && <SearhBox onSearch={setSearchValue} />}
           <NavLink to="/*">
             <BoardsIcon id={"boardicon"} />
           </NavLink>
@@ -62,7 +64,7 @@ const Navigation = () => {
           </NavLink>
           <UserSection onClick={() => setDropdownMenuOpen(!isDropdownMenuOpen)}>
             {user?.photoURL ? (
-              <img src={user?.photoURL || ""} alt="profile picture" />
+              <img src={user?.photoURL} alt="profile picture" />
             ) : (
               <UserWithoutPicture />
             )}
@@ -73,6 +75,7 @@ const Navigation = () => {
           )}
         </NavLinkContainer>
       </NavigationContainer>
+      {isMobile && <SearhBox onSearch={setSearchValue} />}
       <OutletWrapper>
         <Outlet context={searchValue} />
       </OutletWrapper>

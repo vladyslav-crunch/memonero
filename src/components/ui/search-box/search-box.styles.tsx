@@ -8,10 +8,25 @@ export const SearchBoxContainer = styled.div`
   border-radius: 50%;
   width: 62px;
   height: 62px;
+  @media (max-width: 450px) {
+    height: 50px;
+    margin-top: 20px !important;
+  }
   position: relative;
 
   input {
     display: none;
+    @media (max-width: 800px) {
+      display: block;
+    }
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+    justify-content: start;
+    border-radius: 50px;
+    padding: 0 25px;
+    margin-top: 25px;
   }
 
   background-color: #ffe5e0;
@@ -35,6 +50,12 @@ export const SearchBoxContainer = styled.div`
     height: 24px;
     margin-top: 4px;
     background: url(${SearchBoxIcon});
+    @media (max-width: 800px) {
+      top: 31%;
+    }
+    @media (max-width: 450px) {
+      top: 29%;
+    }
   }
 
   &:hover {
@@ -42,6 +63,9 @@ export const SearchBoxContainer = styled.div`
     width: 350px;
     border-radius: 50px;
     padding: 0 25px;
+    @media (max-width: 800px) {
+      width: 100%;
+    }
 
     input {
       display: block;
@@ -53,7 +77,9 @@ export const SearchBoxContainer = styled.div`
     width: 350px;
     border-radius: 50px;
     padding: 0 25px;
-
+    @media (max-width: 800px) {
+      width: 100%;
+    }
     input {
       display: block;
     }

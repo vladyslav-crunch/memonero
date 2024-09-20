@@ -5,6 +5,10 @@ export const DropdownMenuContainer = styled.ul`
   position: absolute;
   right: 35px;
   top: 100px;
+  @media (max-width: 450px) {
+    top: 80px;
+    right: 10px;
+  }
   background: #fff;
   min-width: 200px;
   border-radius: 15px;
@@ -38,6 +42,5 @@ export const DropdownMenuOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  //background-color: rgba(56, 55, 55, 0.3);
   z-index: 1;
 `;
