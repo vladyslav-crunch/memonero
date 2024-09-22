@@ -3,7 +3,6 @@ import {
   AppWrapper,
   NavigationContainer,
   NavLinkContainer,
-  NavLink,
   NavigationLogo,
   OutletWrapper,
   UserSection,
@@ -11,18 +10,17 @@ import {
 } from "./navigation.style";
 import { ReactComponent as MemoneroLogo } from "../../assets/icons/logo.svg";
 import { auth, getUserInfoFromDB } from "../../utils/firebase/firebase.utils";
-import { ReactComponent as DashboardIcon } from "../../assets/nav-icons/dashboard-icon.svg";
-import { ReactComponent as BoardsIcon } from "../../assets/nav-icons/boards-icon.svg";
 import { ReactComponent as DrowdownIcon } from "../../assets/nav-icons/dropdown-icon.svg";
 import { useEffect, useState } from "react";
 import { User } from "firebase/auth";
 import SearhBox from "../../components/ui/search-box/search-box.component";
 import DropdownMenuComponent from "../../components/dropdown-menu/dropdown-menu.component";
-import { useMediaQuery } from "usehooks-ts";
+
 const Navigation = () => {
   const [user, setUser] = useState<User>();
   const [isDropdownMenuOpen, setDropdownMenuOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+
   const setUserFromDataBase = async (user: User) => {
     const UserFromDB = await getUserInfoFromDB(user);
     const newUser = { ...user, displayName: UserFromDB?.displayName };
@@ -43,8 +41,6 @@ const Navigation = () => {
     return () => unsubscribe();
   }, []);
 
-  const isMobile = useMediaQuery("(max-width: 800px)");
-
   return (
     <AppWrapper>
       <NavigationContainer>
@@ -55,13 +51,7 @@ const Navigation = () => {
           </Link>
         </NavigationLogo>
         <NavLinkContainer>
-          {!isMobile && <SearhBox onSearch={setSearchValue} />}
-          <NavLink to="/*">
-            <BoardsIcon id={"boardicon"} />
-          </NavLink>
-          <NavLink to="/">
-            <DashboardIcon />
-          </NavLink>
+          {<SearhBox onSearch={setSearchValue} />}
           <UserSection onClick={() => setDropdownMenuOpen(!isDropdownMenuOpen)}>
             {user?.photoURL ? (
               <img src={user?.photoURL} alt="profile picture" />
@@ -75,7 +65,6 @@ const Navigation = () => {
           )}
         </NavLinkContainer>
       </NavigationContainer>
-      {isMobile && <SearhBox onSearch={setSearchValue} />}
       <OutletWrapper>
         <Outlet context={searchValue} />
       </OutletWrapper>

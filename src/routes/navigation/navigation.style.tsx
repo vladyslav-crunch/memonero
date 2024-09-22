@@ -13,6 +13,17 @@ export const AppWrapper = styled.div`
   @media (max-width: 450px) {
     padding: 15px 15px;
   }
+  &::after {
+    content: "";
+    z-index: -2;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    top: 60%;
+    opacity: 0.3;
+    background: #b24be2;
+    filter: blur(200px);
+  }
 `;
 
 export const NavigationContainer = styled.div`
@@ -42,6 +53,7 @@ export const NavigationLogo = styled.div`
   z-index: 2;
   margin-right: 20px;
   @media (max-width: 450px) {
+    margin-right: 10px;
     svg {
       width: 50px;
       height: 50px;
@@ -125,19 +137,48 @@ export const UserWithoutPicture = styled.div`
   width: 62px;
   border-radius: 50%;
   background: url(${ProfileIcon}) no-repeat center #ffe5e0;
-  background-size: 62px;
+  background-size: 32px;
   margin-right: 20px;
   @media (max-width: 450px) {
     height: 50px;
     width: 50px;
+    margin-right: 10px;
   }
 `;
 export const OutletWrapper = styled.div`
   margin-top: 30px;
   overflow: auto;
-  background-color: #ffecdf;
-  border-radius: 15px;
   height: 100%;
+
+  &::after {
+    content: "";
+    z-index: -2;
+    position: absolute;
+    width: 800px;
+    height: 300px;
+    top: 15%;
+    right: 40%;
+    opacity: 0.2;
+    background: #fa8e2b;
+    filter: blur(100px);
+  }
+
+  &::before {
+    content: "";
+    z-index: -2;
+    position: absolute;
+    width: 800px;
+    height: 300px;
+    top: 60%;
+    right: 20%;
+    opacity: 0.3;
+    background: #fb617d;
+    filter: blur(200px);
+  }
+
+  @media (max-width: 800px) {
+    margin-top: 25px;
+  }
   @media (max-width: 450px) {
     margin-top: 20px;
   }

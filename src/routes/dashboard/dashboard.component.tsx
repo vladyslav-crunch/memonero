@@ -6,8 +6,7 @@ const Dashboard = () => {
   // console.log(x);
   return (
     <>
-      <h1>{x}</h1>
-      <Decks />
+      <div className="">Welcome to Memonero</div>
     </>
   );
 };
