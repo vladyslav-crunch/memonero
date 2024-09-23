@@ -17,6 +17,8 @@ import {
   setDoc,
   addDoc,
   getDocs,
+  query,
+  where,
   getCountFromServer,
   collection,
   DocumentReference,
@@ -125,6 +127,7 @@ export type Deck = {
   deckName: string;
   id?: string;
   numberOfCards?: number;
+  numberOfCardsToRepeat?: number;
 };
 
 export type Card = {
@@ -189,10 +192,19 @@ export const getDecksFromDB = async (userAuth: User): Promise<Deck[]> => {
 
         const cardsCollectionSnapshot =
           await getCountFromServer(cardsCollection);
+
+        const q = query(
+          cardsCollection,
+          where("nextRepetitionTime", "<", new Date()),
+        );
+        const cardsToRepeatSnapshot = await getCountFromServer(q);
+        console.log("count: ", cardsToRepeatSnapshot.data().count);
+
         return {
           id: doc.id,
           deckName: data?.deckName || "Untitled Deck",
-          numberOfCards: cardsCollectionSnapshot.data().count, // Use this if you want to show the count
+          numberOfCards: cardsCollectionSnapshot.data().count,
+          numberOfCardsToRepeat: cardsToRepeatSnapshot.data().count,
         };
       }),
     );
