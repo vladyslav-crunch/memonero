@@ -62,7 +62,7 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
           <div>
             <h2>My decks</h2>
           </div>
-          <div>
+          <div style={{ display: "flex" }}>
             <FilterIcon />
             <AddIcon onClick={createNewDeckHandler} />
           </div>

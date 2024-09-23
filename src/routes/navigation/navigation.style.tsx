@@ -10,6 +10,7 @@ export const AppWrapper = styled.div`
   padding: 30px 40px;
   height: calc(100vh);
   position: relative;
+  max-width: 1920px;
   @media (max-width: 450px) {
     padding: 15px 15px;
   }
@@ -150,9 +151,7 @@ export const UserWithoutPicture = styled.div`
 `;
 export const OutletWrapper = styled.div`
   margin-top: 50px;
-  overflow: auto;
   height: 100%;
-
   &::after {
     content: "";
     z-index: -2;
@@ -165,7 +164,6 @@ export const OutletWrapper = styled.div`
     background: #fa8e2b;
     filter: blur(100px);
   }
-
   &::before {
     content: "";
     z-index: -2;
@@ -178,7 +176,6 @@ export const OutletWrapper = styled.div`
     background: #fb617d;
     filter: blur(200px);
   }
-
   @media (max-width: 800px) {
     margin-top: 25px;
   }

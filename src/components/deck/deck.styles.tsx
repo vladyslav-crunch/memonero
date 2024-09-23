@@ -10,6 +10,9 @@ export const DeckContainer = styled.div`
   width: calc(50% - 7.5px);
   position: relative;
   cursor: pointer;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
   p {
     color: #353535;
   }

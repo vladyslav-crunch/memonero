@@ -34,7 +34,7 @@ const Navigation = () => {
         <NavLinkContainer>
           {<SearhBox onSearch={setSearchValue} />}
           <UserSection onClick={() => setDropdownMenuOpen(!isDropdownMenuOpen)}>
-            {user?.photoURL ? (
+            {user!.photoURL ? (
               <img src={user?.photoURL} alt="profile picture" />
             ) : (
               <UserWithoutPicture />
