@@ -124,6 +124,7 @@ export const sendPasswordResetLinkToEmail = async (email: string) => {
 export type Deck = {
   deckName: string;
   id?: string;
+  numberOfCards?: number;
 };
 
 export type Card = {
@@ -173,13 +174,28 @@ export const getDecksFromDB = async (userAuth: User): Promise<Deck[]> => {
       collection(db, "users", userAuth.uid, "decks"),
     );
 
-    const decks: Deck[] = decksSnapshot.docs.map((doc) => {
-      const data = doc.data();
-      return {
-        id: doc.id,
-        deckName: data?.deckName || "Untitled Deck",
-      };
-    });
+    const decks: Deck[] = await Promise.all(
+      decksSnapshot.docs.map(async (doc) => {
+        const data = doc.data();
+
+        const cardsCollection = collection(
+          db,
+          "users",
+          userAuth.uid,
+          "decks",
+          doc.id,
+          "cards",
+        );
+
+        const cardsCollectionSnapshot =
+          await getCountFromServer(cardsCollection);
+        return {
+          id: doc.id,
+          deckName: data?.deckName || "Untitled Deck",
+          numberOfCards: cardsCollectionSnapshot.data().count, // Use this if you want to show the count
+        };
+      }),
+    );
 
     return decks;
   } catch (error) {

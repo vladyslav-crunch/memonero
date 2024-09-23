@@ -1,15 +1,36 @@
 import { FC } from "react";
-import { Deck as DeckType } from "../../utils/firebase/firebase.utils";
+import {
+  Card,
+  createCardDocument,
+  Deck as DeckType,
+} from "../../utils/firebase/firebase.utils";
+import { useUserContext } from "../../contexts/user.context";
+import { DeckContainer } from "./deck.styles";
 
 type DeckProps = {
   deck: DeckType;
 };
 
 const Deck: FC<DeckProps> = ({ deck }) => {
+  const { user } = useUserContext();
+  const card: Card = {
+    front: "Front test",
+    back: "Back test",
+    context: "Front and Back test",
+    createdAt: new Date(),
+    nextRepetitionTime: new Date(),
+  };
+  const createCardHandler = async () => {
+    await createCardDocument(user!, deck, card);
+  };
   return (
     <>
-      <h3>Deck name: {deck.deckName}</h3>
-      <h4>Deck id: {deck.id}</h4>
+      <DeckContainer>
+        <p>{deck.numberOfCards} cards</p>
+        <h3>{deck.deckName}</h3>
+        {/*<button onClick={createCardHandler}>Create card</button>*/}
+        <span>10</span>
+      </DeckContainer>
     </>
   );
 };

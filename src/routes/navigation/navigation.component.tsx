@@ -47,7 +47,7 @@ const Navigation = () => {
         </NavLinkContainer>
       </NavigationContainer>
       <OutletWrapper>
-        <Outlet context={[searchValue, user]} />
+        <Outlet context={searchValue} />
       </OutletWrapper>
     </AppWrapper>
   );
