@@ -1,5 +1,5 @@
 import Deck from "../deck/deck.component";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FC } from "react";
 import { useUserContext } from "../../contexts/user.context";
 import {
@@ -22,7 +22,6 @@ type decksProps = {
 
 const Decks: FC<decksProps> = ({ searchValue }) => {
   const [decks, setDecks] = useState<DeckType[]>([]);
-  const [filteredDecks, setFilteredDecks] = useState<DeckType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useUserContext();
 
@@ -34,11 +33,10 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
     getAndSetDecks();
   }, []);
 
-  useEffect(() => {
-    const newFilteredDecks = decks.filter((deck) => {
-      return deck.deckName.toLowerCase().includes(searchValue);
+  const filterDecks = useMemo(() => {
+    return decks.filter((deck) => {
+      return deck.deckName.toLowerCase().includes(searchValue.toLowerCase());
     });
-    setFilteredDecks(newFilteredDecks);
   }, [decks, searchValue]);
 
   const createNewDeckHandler = async () => {
@@ -73,9 +71,7 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
           {isLoading ? (
             <Spinner />
           ) : (
-            filteredDecks.map((deck, index) => {
-              return <Deck deck={deck} key={index} />;
-            })
+            filterDecks.map((deck, index) => <Deck deck={deck} key={index} />)
           )}
         </DecksContainer>
       </DecksWrapper>

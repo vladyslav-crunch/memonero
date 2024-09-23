@@ -10,12 +10,12 @@ import { onAuthStateChangedListener } from "../utils/firebase/firebase.utils";
 
 type UserContextType = {
   user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  setUser?: React.Dispatch<React.SetStateAction<User | null>>;
 };
 
 export const UserContext = createContext<UserContextType>({
   user: null,
-  setUser: () => {},
+  setUser: undefined,
 });
 
 type UserProviderProps = {
