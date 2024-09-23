@@ -43,7 +43,7 @@ export const SearchBoxContainer = styled.div`
     height: 24px;
     margin-top: 4px;
     background: url(${SearchBoxIcon});
-    @media (max-width: 1100px) {
+    @media (max-width: 450px) {
       top: 33%;
     }
   }

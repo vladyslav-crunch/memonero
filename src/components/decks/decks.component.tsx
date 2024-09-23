@@ -1,40 +1,55 @@
 import Deck from "../deck/deck.component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FC } from "react";
-
-export type CardType = {
-  question: string;
-  answer: string;
-};
-
-export type DeckType = {
-  name: string;
-  cards: CardType[];
-};
+import { useUserContext } from "../../contexts/user.context";
+import { DecksContainer } from "./decks.styles.component";
+import {
+  createDeckDocument,
+  getDecksFromDB,
+} from "../../utils/firebase/firebase.utils";
+import { Deck as DeckType } from "../../utils/firebase/firebase.utils";
 
 const Decks: FC = () => {
   const [decks, setDecks] = useState<DeckType[]>([]);
+  const { user } = useUserContext();
 
-  const CreateDeck = (): void => {
-    // Define a new deck
-    const newDeck: DeckType = {
-      name: "New Deck", // Example deck name
-      cards: [
-        { question: "Question 1", answer: "Answer 1" },
-        { question: "Question 2", answer: "Answer 2" },
-      ], // Example cards
+  useEffect(() => {
+    const getAndSetDecks = async () => {
+      setDecks(await getDecksFromDB(user!));
+    };
+    getAndSetDecks();
+  }, []);
+
+  const createNewDeckHandler = async () => {
+    const deck: DeckType = {
+      deckName: "deck1",
     };
 
-    // Add the new deck to the existing array of decks
-    setDecks((prevState) => [...prevState, newDeck]);
+    try {
+      const deckFromDB = await createDeckDocument(user!, deck);
+      console.log(deckFromDB?.id);
+    } catch (e) {
+      console.log(e);
+    }
+
+    console.log("Something needs to be created");
   };
+
+  const showAllDecks = async () => {
+    setDecks(await getDecksFromDB(user!));
+  };
+
   return (
     <>
-      <h3>All Decks</h3>
-      {decks.map((deck, index) => {
-        return <Deck deck={deck} key={index} />;
-      })}
-      <button onClick={CreateDeck}>Create New Deck</button>
+      <DecksContainer>
+        <h2>My decks</h2>
+        <p>{user?.displayName}</p>
+        {decks.map((deck, index) => {
+          return <Deck deck={deck} key={index} />;
+        })}
+        <button onClick={createNewDeckHandler}>Create New Deck</button>
+        <button onClick={showAllDecks}>Show all decks</button>
+      </DecksContainer>
     </>
   );
 };

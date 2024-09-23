@@ -1,13 +1,15 @@
 import Decks from "../../components/decks/decks.component";
 import { useOutletContext } from "react-router-dom";
-
+import { DashboardContainer } from "./dashboard.style";
+import Report from "../../components/report/report.component";
+import { User } from "firebase/auth";
 const Dashboard = () => {
-  const x: string = useOutletContext();
-  // console.log(x);
+  const [searchValue]: [string] = useOutletContext();
   return (
-    <>
-      <div className="">Welcome to Memonero</div>
-    </>
+    <DashboardContainer>
+      <Report />
+      <Decks />
+    </DashboardContainer>
   );
 };
 

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DeckType } from "../decks/decks.component";
+import { Deck as DeckType } from "../../utils/firebase/firebase.utils";
 
 type DeckProps = {
   deck: DeckType;
@@ -7,10 +7,10 @@ type DeckProps = {
 
 const Deck: FC<DeckProps> = ({ deck }) => {
   return (
-    <div>
-      <h4>{deck.name}</h4>
-      <h5>{deck.cards.length} cards</h5>
-    </div>
+    <>
+      <h3>Deck name: {deck.deckName}</h3>
+      <h4>Deck id: {deck.id}</h4>
+    </>
   );
 };
 

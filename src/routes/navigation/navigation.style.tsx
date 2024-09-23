@@ -129,6 +129,9 @@ export const UserSection = styled.div`
 
   img {
     margin-right: 20px;
+    @media (max-width: 450px) {
+      margin-right: 10px;
+    }
   }
 `;
 
@@ -146,7 +149,7 @@ export const UserWithoutPicture = styled.div`
   }
 `;
 export const OutletWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: 50px;
   overflow: auto;
   height: 100%;
 

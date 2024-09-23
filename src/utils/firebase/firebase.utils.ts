@@ -8,12 +8,17 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  onAuthStateChanged,
 } from "firebase/auth";
 import {
   getFirestore,
   doc,
   getDoc,
   setDoc,
+  addDoc,
+  getDocs,
+  getCountFromServer,
+  collection,
   DocumentReference,
   DocumentData,
   QueryDocumentSnapshot,
@@ -59,7 +64,7 @@ export type UserData = {
 
 export const createUserDocumentFromAuth = async (
   userAuth: User | undefined,
-  additionInformation = {} as AdditionInformation
+  additionInformation = {} as AdditionInformation,
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
   const userDocRef = doc(db, "users", userAuth.uid);
@@ -84,7 +89,7 @@ export const createUserDocumentFromAuth = async (
 
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
-  password: string
+  password: string,
 ) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
@@ -92,7 +97,7 @@ export const createAuthUserWithEmailAndPassword = async (
 
 export const signInAuthUserWithEmailAndPassword = async (
   email: string,
-  password: string
+  password: string,
 ) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
@@ -100,7 +105,7 @@ export const signInAuthUserWithEmailAndPassword = async (
 
 export const signOutUser = async () => signOut(auth);
 
-export const getUserInfoFromDB = async (userAuth: User | undefined) => {
+export const getUserInfoFromDB = async (userAuth: User) => {
   if (!userAuth) {
     return;
   }
@@ -115,3 +120,73 @@ export const sendPasswordResetLinkToEmail = async (email: string) => {
   if (!email) return;
   return await sendPasswordResetEmail(auth, email);
 };
+
+export type Deck = {
+  deckName: string;
+  id?: string;
+};
+
+export type Card = {
+  front: string;
+  back: string;
+  context?: string;
+  createdAt: Date;
+  nextRepetitionTime: Date;
+};
+
+export const createDeckDocument = async (userAuth: User, deck: Deck) => {
+  if (!userAuth) {
+    return;
+  }
+  const deckDocRef = await addDoc(
+    collection(db, "users", userAuth.uid, "decks"),
+    deck,
+  );
+  const deckSnapshot = await getDoc(deckDocRef);
+
+  return deckSnapshot;
+};
+
+export const createCardDocument = async (
+  userAuth: User,
+  deck: Deck,
+  card: Card,
+) => {
+  if (!userAuth) {
+    return;
+  }
+  if (!deck.id) {
+    return;
+  }
+  const cardDocRef = await addDoc(
+    collection(db, "users", userAuth.uid, "decks", deck.id, "cards"),
+    card,
+  );
+  const cardSnapshot = await getDoc(cardDocRef);
+
+  return cardSnapshot;
+};
+
+export const getDecksFromDB = async (userAuth: User): Promise<Deck[]> => {
+  try {
+    const decksSnapshot = await getDocs(
+      collection(db, "users", userAuth.uid, "decks"),
+    );
+
+    const decks: Deck[] = decksSnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        deckName: data?.deckName || "Untitled Deck",
+      };
+    });
+
+    return decks;
+  } catch (error) {
+    console.error("Error fetching decks:", error);
+    return [];
+  }
+};
+
+export const onAuthStateChangedListener = (callback: any) =>
+  onAuthStateChanged(auth, callback);

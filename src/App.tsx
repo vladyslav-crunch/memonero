@@ -8,7 +8,6 @@ import SignUp from "./routes/sign-up/sign-up.component";
 import ResetPassword from "./routes/reset-password/reset-password.component";
 import ProtectedRoutes from "./utils/protected-routes/protected-routes";
 import Header from "./components/header/header.component";
-import Decks from "./routes/decks/decks.component";
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/support" element={<Support />} />
-          <Route path="/decks" element={<Decks />} />
           <Route path="/*" element={<Dashboard />} />
         </Route>
       </Route>
