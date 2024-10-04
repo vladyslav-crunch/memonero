@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/memonero/static/css/main.ef4eb634.css",
-    "main.js": "/memonero/static/js/main.30aad1b1.js",
+    "main.js": "/memonero/static/js/main.b3f6fa3f.js",
     "static/js/453.b7a34af3.chunk.js": "/memonero/static/js/453.b7a34af3.chunk.js",
     "static/media/setting-icon.svg": "/memonero/static/media/setting-icon.a9bd42a17adadbacbb46a3e5e30efdde.svg",
     "static/media/google-icon.svg": "/memonero/static/media/google-icon.ab403f220c9eab554bfac4ed7818a535.svg",
-    "static/media/boards-icon.svg": "/memonero/static/media/boards-icon.450346f2baecd8608cc26d7a24dbf50b.svg",
     "static/media/error-icon.svg": "/memonero/static/media/error-icon.275d89c36ca2146c1de3ded0908af52a.svg",
     "static/media/password-icon.svg": "/memonero/static/media/password-icon.f90dd49bc9ea6d90c2d217bba8218a39.svg",
     "static/media/logo.svg": "/memonero/static/media/logo.32f66706c785b2fec5c4e6beac602555.svg",
     "index.html": "/memonero/index.html",
-    "static/media/dashboard-icon.svg": "/memonero/static/media/dashboard-icon.a7d7dfe7090f7a76c25c36e97101ffd9.svg",
+    "static/media/fliter-icon.svg": "/memonero/static/media/fliter-icon.a999558221682cf8c6b94f6629a7eb69.svg",
+    "static/media/plus-icon.svg": "/memonero/static/media/plus-icon.7d2f2ad295f40733c9a2d47f7cedfbb1.svg",
     "static/media/email-icon.svg": "/memonero/static/media/email-icon.72a0729642dd2697115c76087d8859ac.svg",
     "static/media/username-icon.svg": "/memonero/static/media/username-icon.b81151eafe966059d55d74c1345a6aec.svg",
     "static/media/profile-icon.svg": "/memonero/static/media/profile-icon.9afcd89fb7e9d87204a675d51148bbe6.svg",
@@ -19,11 +19,11 @@
     "static/media/dropdown-icon.svg": "/memonero/static/media/dropdown-icon.7fcb3b5a7d9e8f7e4065f95574b09c55.svg",
     "static/media/close-icon.svg": "/memonero/static/media/close-icon.afa8a1ffb1f4610733c3b073b230e4b2.svg",
     "main.ef4eb634.css.map": "/memonero/static/css/main.ef4eb634.css.map",
-    "main.30aad1b1.js.map": "/memonero/static/js/main.30aad1b1.js.map",
+    "main.b3f6fa3f.js.map": "/memonero/static/js/main.b3f6fa3f.js.map",
     "453.b7a34af3.chunk.js.map": "/memonero/static/js/453.b7a34af3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ef4eb634.css",
-    "static/js/main.30aad1b1.js"
+    "static/js/main.b3f6fa3f.js"
   ]
 }
