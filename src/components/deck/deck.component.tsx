@@ -19,6 +19,7 @@ const Deck: FC<DeckProps> = ({ deck }) => {
     context: "Front and Back test",
     createdAt: new Date(),
     nextRepetitionTime: new Date(),
+    intervalStrength: 0,
   };
   const createCardHandler = async () => {
     await createCardDocument(user!, deck, card);

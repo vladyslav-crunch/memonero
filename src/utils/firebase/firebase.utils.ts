@@ -136,6 +136,7 @@ export type Card = {
   context?: string;
   createdAt: Date;
   nextRepetitionTime: Date;
+  intervalStrength: number;
 };
 
 export const createDeckDocument = async (userAuth: User, deck: Deck) => {
