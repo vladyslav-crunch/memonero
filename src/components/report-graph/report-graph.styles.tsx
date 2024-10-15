@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ReportGraphContainer = styled.div`
   background-color: #ffe9db;
-  height: calc(60%);
+  height: 300px;
   border-radius: 30px;
   display: flex;
   justify-content: center;
