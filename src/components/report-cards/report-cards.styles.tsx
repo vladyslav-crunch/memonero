@@ -23,6 +23,9 @@ export const ReportCard = styled.div`
     position: absolute;
     left: 0px;
     height: 100%;
+    @media (max-width: 340px) {
+      width: 20px;
+    }
   }
   &:not(:last-child) {
     margin-right: 20px;

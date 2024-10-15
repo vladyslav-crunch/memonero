@@ -170,7 +170,7 @@ export const OutletWrapper = styled.div`
     position: absolute;
     width: 800px;
     height: 300px;
-    top: 60%;
+    top: 50%;
     right: 20%;
     opacity: 0.3;
     background: #fb617d;
