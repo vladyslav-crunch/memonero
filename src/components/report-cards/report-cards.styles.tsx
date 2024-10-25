@@ -3,39 +3,50 @@ import styled from "styled-components";
 export const ReportCardsContainer = styled.div`
   display: flex;
   margin-top: 25px;
+  margin-left: 40px;
+  @media (max-width: 600px) {
+    margin-left: 15px;
+  }
 `;
 export const ReportCard = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
   align-items: center;
-  height: 75px;
-  width: 125px;
   border-radius: 20px;
-  background-color: #eeb0a4;
   color: #2c2c2c;
+
   &::after {
     content: "";
     background-color: ${({ color }) => `#${color}`};
-    border-radius: 20px 100% 100% 20px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
     position: absolute;
-    left: 0px;
-    height: 100%;
-    @media (max-width: 340px) {
-      width: 20px;
+    left: -27px;
+    @media (max-width: 600px) {
+      height: 15px;
+      width: 15px;
+      left: -20px;
     }
   }
-  &:not(:last-child) {
-    margin-right: 20px;
+  &:not(:first-child) {
+    margin-left: 45px;
+    @media (max-width: 600px) {
+      margin-left: 30px;
+    }
   }
   .report-card-title {
     font-weight: 600;
     font-size: 16px;
+    @media (max-width: 350px) {
+      font-size: 14px;
+    }
   }
   .report-card-value {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
+    @media (max-width: 350px) {
+      font-size: 14px;
+    }
   }
 `;

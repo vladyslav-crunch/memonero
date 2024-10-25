@@ -6,10 +6,10 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 import { ReportGraphContainer } from "./report-graph.styles";
+import ReportCards from "../report-cards/report-cards.component";
 
 const data = [
   {
@@ -19,37 +19,37 @@ const data = [
     High: 1,
   },
   {
-    date: "12.10.24",
+    date: "13.10.24",
     Low: 8,
     Mid: 4,
     High: 2,
   },
   {
-    date: "12.10.24",
+    date: "14.10.24",
     Low: 7,
     Mid: 6,
     High: 4,
   },
   {
-    date: "12.10.24",
+    date: "15.10.24",
     Low: 7,
     Mid: 5,
     High: 5,
   },
   {
-    date: "12.10.24",
+    date: "16.10.24",
     Low: 8,
     Mid: 6,
     High: 5,
   },
   {
-    date: "12.10.24",
+    date: "17.10.24",
     Low: 12,
     Mid: 7,
     High: 6,
   },
   {
-    date: "12.10.24",
+    date: "18.10.24",
     Low: 12,
     Mid: 10,
     High: 7,
@@ -73,12 +73,13 @@ const ReportGraph = () => {
           <XAxis dataKey="date" />
           <YAxis />
           <Tooltip />
-          <Legend />
+          {/*<Legend />*/}
           <Line type="monotone" dataKey="Low" stroke="#EF6565" />
           <Line type="monotone" dataKey="Mid" stroke="#FFE24A" />
           <Line type="monotone" dataKey="High" stroke="#CA37FF" />
         </LineChart>
       </ResponsiveContainer>
+      <ReportCards />
     </ReportGraphContainer>
   );
 };
