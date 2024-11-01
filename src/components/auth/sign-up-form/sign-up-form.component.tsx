@@ -159,7 +159,7 @@ const SignUpForm = () => {
           onChange={handleCheckboxChange}
         />
         <Button
-          buttonType={BUTTON_TYPE_CLASSES.sign}
+          buttonType={BUTTON_TYPE_CLASSES.orange}
           type="submit"
           isLoading={isLoading}
         >

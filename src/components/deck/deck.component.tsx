@@ -26,7 +26,11 @@ const Deck: FC<DeckProps> = ({ deck }) => {
   };
   return (
     <>
-      <DeckContainer>
+      <DeckContainer
+        onClick={() => {
+          alert("Here will be menu");
+        }}
+      >
         <p>{deck.numberOfCards} cards</p>
         <h3>{deck.deckName}</h3>
         {/*<button onClick={createCardHandler}>Create card</button>*/}

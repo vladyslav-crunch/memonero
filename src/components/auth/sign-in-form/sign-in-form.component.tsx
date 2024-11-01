@@ -125,7 +125,7 @@ const SignInForm = () => {
         />
         <Button
           type="submit"
-          buttonType={BUTTON_TYPE_CLASSES.sign}
+          buttonType={BUTTON_TYPE_CLASSES.orange}
           isLoading={isLoading}
         >
           Sign In

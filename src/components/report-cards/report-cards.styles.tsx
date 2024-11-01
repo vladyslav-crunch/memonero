@@ -36,7 +36,7 @@ export const ReportCard = styled.div`
     }
   }
   .report-card-title {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
     @media (max-width: 350px) {
       font-size: 14px;

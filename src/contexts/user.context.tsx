@@ -5,7 +5,7 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
-import { User } from "firebase/auth"; // Import Firebase User type
+import { User } from "firebase/auth";
 import { onAuthStateChangedListener } from "../utils/firebase/firebase.utils";
 
 type UserContextType = {

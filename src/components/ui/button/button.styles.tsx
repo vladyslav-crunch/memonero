@@ -14,10 +14,9 @@ export const BaseButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
 `;
 
-export const SignButton = styled(BaseButton)`
+export const OrangeButton = styled(BaseButton)`
   background: linear-gradient(
     150deg,
     rgba(236, 156, 51, 0.616) 0%,
@@ -60,7 +59,6 @@ export const SingInGoogle = styled(BaseButton)`
   background-color: #fff7f0;
   font-weight: 500;
   color: #6e6e6e;
-
 `;
 
 export const BlackButton = styled(BaseButton)`

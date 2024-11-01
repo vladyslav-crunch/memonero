@@ -7,14 +7,12 @@ import {
   DecksWrapper,
   DecksHeader,
 } from "./decks.styles.component";
-import {
-  createDeckDocument,
-  getDecksFromDB,
-} from "../../utils/firebase/firebase.utils";
+import { getDecksFromDB } from "../../utils/firebase/firebase.utils";
 import { Deck as DeckType } from "../../utils/firebase/firebase.utils";
 import { ReactComponent as FilterIcon } from "../../assets/icons/fliter-icon.svg";
 import { ReactComponent as AddIcon } from "../../assets/icons/plus-icon.svg";
 import Spinner from "../ui/spinner/spinner.component";
+import DeckCreateModal from "../deck-create-modal/deck-create-modal.component";
 
 type decksProps = {
   searchValue: string;
@@ -22,16 +20,28 @@ type decksProps = {
 
 const Decks: FC<decksProps> = ({ searchValue }) => {
   const [decks, setDecks] = useState<DeckType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCreatingNewDeck, setIsCreatingNewDeck] = useState<boolean>(false);
+  const [isShowCreateModalWindow, setIsShowCreateModalWindow] =
+    useState<boolean>(false);
   const { user } = useUserContext();
+
+  const creatingNewDeckStateHandler = () => {
+    setIsCreatingNewDeck(!isCreatingNewDeck);
+  };
 
   useEffect(() => {
     const getAndSetDecks = async () => {
-      setDecks(await getDecksFromDB(user!));
-      setIsLoading(false);
+      setIsLoading(true);
+      try {
+        setDecks(await getDecksFromDB(user!));
+      } catch (e) {
+      } finally {
+        setIsLoading(false);
+      }
     };
     getAndSetDecks();
-  }, []);
+  }, [isCreatingNewDeck]);
 
   const filterDecks = useMemo(() => {
     return decks.filter((deck) => {
@@ -39,20 +49,8 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
     });
   }, [decks, searchValue]);
 
-  const createNewDeckHandler = async () => {
-    setIsLoading(true);
-    const deck: DeckType = {
-      deckName: "NewDeck",
-    };
-
-    try {
-      await createDeckDocument(user!, deck);
-      setDecks(await getDecksFromDB(user!));
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setIsLoading(false);
-    }
+  const showCreateModalDeckHandler = () => {
+    setIsShowCreateModalWindow(!isShowCreateModalWindow);
   };
 
   return (
@@ -64,7 +62,7 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
           </div>
           <div style={{ display: "flex" }}>
             <FilterIcon />
-            <AddIcon onClick={createNewDeckHandler} />
+            <AddIcon onClick={showCreateModalDeckHandler} />
           </div>
         </DecksHeader>
         <DecksContainer>
@@ -75,6 +73,12 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
           )}
         </DecksContainer>
       </DecksWrapper>
+      {isShowCreateModalWindow && (
+        <DeckCreateModal
+          onClose={showCreateModalDeckHandler}
+          onSubmit={creatingNewDeckStateHandler}
+        />
+      )}
     </>
   );
 };

@@ -125,6 +125,7 @@ export const sendPasswordResetLinkToEmail = async (email: string) => {
 
 export type Deck = {
   deckName: string;
+  deckType: string[];
   id?: string;
   numberOfCards?: number;
   numberOfCardsToRepeat?: number;
@@ -199,11 +200,11 @@ export const getDecksFromDB = async (userAuth: User): Promise<Deck[]> => {
           where("nextRepetitionTime", "<", new Date()),
         );
         const cardsToRepeatSnapshot = await getCountFromServer(q);
-        console.log("count: ", cardsToRepeatSnapshot.data().count);
 
         return {
           id: doc.id,
-          deckName: data?.deckName || "Untitled Deck",
+          deckName: data?.deckName,
+          deckType: data?.deckType,
           numberOfCards: cardsCollectionSnapshot.data().count,
           numberOfCardsToRepeat: cardsToRepeatSnapshot.data().count,
         };

@@ -1,7 +1,7 @@
 import {
   BaseButton,
   ButtonSpinner,
-  SignButton,
+  OrangeButton,
   SingInGoogle,
   BlackButton,
 } from "./button.styles";
@@ -10,7 +10,7 @@ import { FC } from "react";
 
 export enum BUTTON_TYPE_CLASSES {
   base = "base",
-  sign = "sign",
+  orange = "orange",
   googleSignIn = "google-sign-in",
   black = "black",
 }
@@ -18,10 +18,10 @@ export enum BUTTON_TYPE_CLASSES {
 const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
   ({
     [BUTTON_TYPE_CLASSES.base]: BaseButton,
-    [BUTTON_TYPE_CLASSES.sign]: SignButton,
+    [BUTTON_TYPE_CLASSES.orange]: OrangeButton,
     [BUTTON_TYPE_CLASSES.googleSignIn]: SingInGoogle,
     [BUTTON_TYPE_CLASSES.black]: BlackButton,
-  }[buttonType]);
+  })[buttonType];
 
 export type ButtonProps = {
   buttonType?: BUTTON_TYPE_CLASSES;
