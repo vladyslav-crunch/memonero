@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+
+type modalProps = {
+  version?: string;
+};
+
 export const ModalWindowOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -10,7 +15,7 @@ export const ModalWindowOverlay = styled.div`
   z-index: 2;
 `;
 
-export const ModalWindowWrapper = styled.div`
+export const ModalWindowWrapper = styled.div<modalProps>`
   position: fixed;
   width: 600px;
   top: 50%;
@@ -80,6 +85,19 @@ export const ModalWindowWrapper = styled.div`
     padding: 25px;
     min-width: 320px;
   }
+  ${({ version }) =>
+    version === "menu" &&
+    `
+width: 340px;
+padding: 9px !important;
+button{
+margin-top: 6px;
+font-size:16px;
+height:54px;
+}
+button:first-child{
+margin-top: 0;
+}`}
 `;
 
 export const MotionModalWindowWrapper = motion(ModalWindowWrapper);

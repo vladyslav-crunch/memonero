@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { SpinnerContainer } from "../spinner/spinner.styles";
-export const BaseButton = styled.button`
+import { ButtonProps } from "./button.component";
+
+export const BaseButton = styled.button<ButtonProps>`
   min-width: 165px;
   width: 100%;
   height: 55px;
@@ -14,6 +16,17 @@ export const BaseButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+
+    background: ${({ icon }) => `url(${icon}) center center no-repeat; `};
+  }
 `;
 
 export const OrangeButton = styled(BaseButton)`
@@ -69,6 +82,15 @@ export const BlackButton = styled(BaseButton)`
   &:disabled {
     background-color: #434343;
   }
+`;
+
+export const MenuButton = styled(BaseButton)`
+  border: none;
+  background-color: #ffe1d1;
+  &:hover {
+    background-color: #ffd3ba;
+  }
+  transition: 0.2s;
 `;
 
 export const ButtonSpinner = styled(SpinnerContainer)`
