@@ -21,7 +21,7 @@ const DropdownMenuComponent: FC<DropdownMenuComponentProps> = ({
   const onClickHandler = () => {
     onOverlay(false);
   };
-  return ReactDOM.createPortal(
+  return (
     <>
       <DropdownMenuOverlay onClick={onClickHandler} />
       <DropdownMenuContainer>
@@ -38,8 +38,7 @@ const DropdownMenuComponent: FC<DropdownMenuComponentProps> = ({
           <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContainer>
-    </>,
-    document.getElementById("portal") as HTMLElement,
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ export const DeckContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #ffe9db;
-  padding: 10px 15px;
+  padding: 10px 55px 10px 15px;
   border-radius: 15px;
   height: 100px;
   width: calc(50% - 7.5px);

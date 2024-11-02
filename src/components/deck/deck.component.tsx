@@ -34,7 +34,11 @@ const Deck: FC<DeckProps> = ({ deck }) => {
         <p>{deck.numberOfCards} cards</p>
         <h3>{deck.deckName}</h3>
         {/*<button onClick={createCardHandler}>Create card</button>*/}
-        <span>{deck.numberOfCardsToRepeat}</span>
+        {deck.numberOfCardsToRepeat ? (
+          <span>{deck.numberOfCardsToRepeat}</span>
+        ) : (
+          ""
+        )}
       </DeckContainer>
     </>
   );

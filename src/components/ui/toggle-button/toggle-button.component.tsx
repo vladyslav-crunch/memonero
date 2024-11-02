@@ -14,9 +14,9 @@ const ToggleButton: FC<ToggleButtonProps> = ({
 }) => {
   return (
     <ToggleButtonContainer
-      $isToggled={isToggled} // Use `$isToggled` here
+      type={"button"}
+      $isToggled={isToggled}
       {...otherProps}
-      type="button"
     >
       {label}
     </ToggleButtonContainer>

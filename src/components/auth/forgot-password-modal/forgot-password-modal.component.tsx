@@ -60,8 +60,8 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({ onClose }) => {
     <>
       <ModalWindowOverlay onClick={onClose}> </ModalWindowOverlay>
       <MotionModalWindowWrapper
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.1 }}
       >
         <form onSubmit={onSubmit}>

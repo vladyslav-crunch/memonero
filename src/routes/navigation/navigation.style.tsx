@@ -37,7 +37,6 @@ export const NavigationContainer = styled.div`
 export const NavLinkContainer = styled.div`
   display: flex;
   z-index: 2;
-
   img {
     height: 62px;
     width: 62px;

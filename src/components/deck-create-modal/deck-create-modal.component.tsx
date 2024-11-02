@@ -21,7 +21,8 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUserContext();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     if (user) {
       setIsLoading(true);
       try {
@@ -41,7 +42,11 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
     setDeck((prevDeck) => ({ ...prevDeck, deckName: value }));
   };
 
-  const handleToggle = (type: string) => {
+  const handleToggle = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    type: string,
+  ) => {
+    event.preventDefault(); // Prevent form submission when clicking the toggle
     setDeck((prevDeck) => {
       const { deckType } = prevDeck;
       if (deckType.includes(type)) {
@@ -67,7 +72,7 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
         <CloseIcon onClick={onClose} style={{ cursor: "pointer" }} />
       </div>
       <div className="modalBody">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="modalFormItem">
             <label htmlFor="name" className="form-label">
               Deck name
@@ -75,6 +80,7 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
             <Input
               placeholder={"English, History, etc."}
               onChange={handleChange}
+              maxLength={40}
             />
           </div>
           <div className="modalFormItem">
@@ -84,25 +90,24 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
             <div className="toggle-buttons">
               <ToggleButton
                 label={"Normal"}
-                onClick={() => handleToggle("normal")}
+                onClick={(event) => handleToggle(event, "normal")}
                 isToggled={deck.deckType.includes("normal")}
               />
               <ToggleButton
                 label={"Reversed"}
-                onClick={() => handleToggle("reversed")}
+                onClick={(event) => handleToggle(event, "reversed")}
                 isToggled={deck.deckType.includes("reversed")}
               />
               <ToggleButton
                 label={"Typing"}
-                onClick={() => handleToggle("typing")}
+                onClick={(event) => handleToggle(event, "typing")}
                 isToggled={deck.deckType.includes("typing")}
               />
             </div>
           </div>
           <Button
-            type={"button"}
             buttonType={BUTTON_TYPE_CLASSES.orange}
-            onClick={handleSubmit}
+            type={"submit"}
             isLoading={isLoading}
           >
             Create
