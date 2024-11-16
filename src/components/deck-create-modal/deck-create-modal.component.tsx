@@ -10,7 +10,7 @@ import { Deck } from "../../utils/firebase/firebase.utils";
 
 type DeckCreateModalProps = {
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit: (createdDeck: Deck) => void;
 };
 
 const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
@@ -20,19 +20,23 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUserContext();
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    let newDeck;
     if (user) {
       setIsLoading(true);
       try {
-        await createDeckDocument(user, deck);
+        newDeck = await createDeckDocument(user, deck);
       } catch (err) {
         console.log(err);
       } finally {
         setIsLoading(false);
       }
-      onSubmit();
+      let updatedDeck: Deck;
+      if (newDeck) {
+        updatedDeck = { ...deck, id: newDeck.id };
+        onSubmit(updatedDeck);
+      }
       onClose();
     }
   };
@@ -46,7 +50,7 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
     event: React.MouseEvent<HTMLButtonElement>,
     type: string,
   ) => {
-    event.preventDefault(); // Prevent form submission when clicking the toggle
+    event.preventDefault();
     setDeck((prevDeck) => {
       const { deckType } = prevDeck;
       if (deckType.includes(type)) {

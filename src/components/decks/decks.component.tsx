@@ -13,6 +13,7 @@ import { ReactComponent as FilterIcon } from "../../assets/icons/fliter-icon.svg
 import { ReactComponent as AddIcon } from "../../assets/icons/plus-icon.svg";
 import Spinner from "../ui/spinner/spinner.component";
 import DeckCreateModal from "../deck-create-modal/deck-create-modal.component";
+import CardAddModal from "../card-add-modal/card-add-modal.component";
 
 type decksProps = {
   searchValue: string;
@@ -24,10 +25,17 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
   const [isCreatingNewDeck, setIsCreatingNewDeck] = useState<boolean>(false);
   const [isShowCreateModalWindow, setIsShowCreateModalWindow] =
     useState<boolean>(false);
+  const [isShowCardAddModalWindow, setIsShowCardAddModalWindow] =
+    useState(false);
+  const [deckForCards, setDeckForCards] = useState<DeckType>();
   const { user } = useUserContext();
 
-  const creatingNewDeckStateHandler = () => {
+  const creatingNewDeckStateHandler = (newDeck?: DeckType) => {
     setIsCreatingNewDeck(!isCreatingNewDeck);
+    if (newDeck) {
+      setDeckForCards(newDeck); // Set the newly created deck for CardAddModal
+      setIsShowCardAddModalWindow(true); // Show CardAddModal immediately
+    }
   };
 
   useEffect(() => {
@@ -77,6 +85,12 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
         <DeckCreateModal
           onClose={showCreateModalDeckHandler}
           onSubmit={creatingNewDeckStateHandler}
+        />
+      )}
+      {isShowCardAddModalWindow && (
+        <CardAddModal
+          onClose={() => setIsShowCardAddModalWindow(false)}
+          deck={deckForCards!}
         />
       )}
     </>

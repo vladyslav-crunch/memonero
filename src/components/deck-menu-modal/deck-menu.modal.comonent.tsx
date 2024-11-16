@@ -17,7 +17,6 @@ type DeckMenuProps = {
 
 const DeckMenuModal: FC<DeckMenuProps> = ({ onClose, deck }) => {
   const [isShowCardAddModal, setIsShowCardAddModal] = useState(false);
-
   return (
     <>
       <Modal onClose={onClose} version={"menu"}>

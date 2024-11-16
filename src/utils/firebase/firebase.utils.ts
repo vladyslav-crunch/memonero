@@ -164,6 +164,7 @@ export const createCardDocument = async (
   if (!deck.id) {
     return;
   }
+
   const cardDocRef = await addDoc(
     collection(db, "users", userAuth.uid, "decks", deck.id, "cards"),
     card,

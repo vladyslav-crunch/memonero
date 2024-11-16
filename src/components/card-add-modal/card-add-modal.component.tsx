@@ -3,12 +3,7 @@ import Modal from "../ui/modal/modal.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../ui/button/button.component";
 import { ReactComponent as CloseIcon } from "../../assets/icons/close-icon.svg";
 import Input from "../ui/input/input.component";
-import {
-  Card,
-  createCardDocument,
-  createDeckDocument,
-} from "../../utils/firebase/firebase.utils";
-import ToggleButton from "../ui/toggle-button/toggle-button.component";
+import { Card, createCardDocument } from "../../utils/firebase/firebase.utils";
 import { useUserContext } from "../../contexts/user.context";
 import { Deck } from "../../utils/firebase/firebase.utils";
 
@@ -31,9 +26,7 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
   const [card, setCard] = useState<Card>(defaultCardFields);
   const { front, back, context } = card;
   const { user } = useUserContext();
-
   const resetFormFields = () => setCard(defaultCardFields);
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (user) {
@@ -52,7 +45,6 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setCard({ ...card, [name]: value });
-    console.log(card);
   };
 
   return (
