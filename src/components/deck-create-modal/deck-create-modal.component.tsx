@@ -20,6 +20,7 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUserContext();
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     let newDeck;

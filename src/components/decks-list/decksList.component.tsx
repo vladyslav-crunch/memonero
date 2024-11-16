@@ -4,11 +4,11 @@ import { DecksContainer } from "../decks/decks.styles.component";
 import useDecks from "../decks/useDecks";
 
 type Props = {
-  isCreatingNewDeck: boolean;
+  shouldRefetchDecksTrigger: boolean;
 };
 
-export default function DecksList({ isCreatingNewDeck }: Props) {
-  const { filteredDecks, isDecksLoading } = useDecks(isCreatingNewDeck);
+export default function DecksList({ shouldRefetchDecksTrigger }: Props) {
+  const { filteredDecks, isDecksLoading } = useDecks(shouldRefetchDecksTrigger);
 
   return (
     <DecksContainer>

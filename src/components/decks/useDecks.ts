@@ -6,7 +6,7 @@ import {
 import { useUserContext } from "../../contexts/user.context";
 import { useOutletContext } from "react-router-dom";
 
-export default function useDecks(isCreatingNewDeck: boolean) {
+export default function useDecks(shouldRefetchDecksTrigger: boolean) {
   const searchValue: string = useOutletContext();
   const { user } = useUserContext();
   const [decks, setDecks] = useState<DeckType[]>([]);
@@ -23,7 +23,7 @@ export default function useDecks(isCreatingNewDeck: boolean) {
       }
     };
     getAndSetDecks();
-  }, [isCreatingNewDeck]);
+  }, [shouldRefetchDecksTrigger]);
 
   const filteredDecks = useMemo(() => {
     return decks.filter((deck) => {
