@@ -1,34 +1,27 @@
 import Deck from "../deck/deck.component";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FC } from "react";
-import { useUserContext } from "../../contexts/user.context";
 import {
   DecksContainer,
   DecksWrapper,
   DecksHeader,
 } from "./decks.styles.component";
-import { getDecksFromDB } from "../../utils/firebase/firebase.utils";
 import { Deck as DeckType } from "../../utils/firebase/firebase.utils";
 import { ReactComponent as FilterIcon } from "../../assets/icons/fliter-icon.svg";
 import { ReactComponent as AddIcon } from "../../assets/icons/plus-icon.svg";
 import Spinner from "../ui/spinner/spinner.component";
 import DeckCreateModal from "../deck-create-modal/deck-create-modal.component";
 import CardAddModal from "../card-add-modal/card-add-modal.component";
+import useDecks from "./useDecks";
 
-type decksProps = {
-  searchValue: string;
-};
-
-const Decks: FC<decksProps> = ({ searchValue }) => {
-  const [decks, setDecks] = useState<DeckType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+const Decks: FC = () => {
   const [isCreatingNewDeck, setIsCreatingNewDeck] = useState<boolean>(false);
   const [isShowCreateModalWindow, setIsShowCreateModalWindow] =
     useState<boolean>(false);
   const [isShowCardAddModalWindow, setIsShowCardAddModalWindow] =
     useState(false);
   const [deckForCards, setDeckForCards] = useState<DeckType>();
-  const { user } = useUserContext();
+  const { filteredDecks, isDecksLoading } = useDecks(isCreatingNewDeck);
 
   const creatingNewDeckStateHandler = (newDeck?: DeckType) => {
     setIsCreatingNewDeck(!isCreatingNewDeck);
@@ -37,25 +30,6 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
       setIsShowCardAddModalWindow(true); // Show CardAddModal immediately
     }
   };
-
-  useEffect(() => {
-    const getAndSetDecks = async () => {
-      setIsLoading(true);
-      try {
-        setDecks(await getDecksFromDB(user!));
-      } catch (e) {
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getAndSetDecks();
-  }, [isCreatingNewDeck]);
-
-  const filterDecks = useMemo(() => {
-    return decks.filter((deck) => {
-      return deck.deckName.toLowerCase().includes(searchValue.toLowerCase());
-    });
-  }, [decks, searchValue]);
 
   const showCreateModalDeckHandler = () => {
     setIsShowCreateModalWindow(!isShowCreateModalWindow);
@@ -74,10 +48,10 @@ const Decks: FC<decksProps> = ({ searchValue }) => {
           </div>
         </DecksHeader>
         <DecksContainer>
-          {isLoading ? (
+          {isDecksLoading ? (
             <Spinner />
           ) : (
-            filterDecks.map((deck, index) => <Deck deck={deck} key={index} />)
+            filteredDecks.map((deck, index) => <Deck deck={deck} key={index} />)
           )}
         </DecksContainer>
       </DecksWrapper>
