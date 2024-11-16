@@ -1,28 +1,17 @@
-import Deck from "../deck/deck.component";
-import { useMemo, useState } from "react";
-import { FC } from "react";
-import {
-  DecksContainer,
-  DecksWrapper,
-  DecksHeader,
-} from "./decks.styles.component";
+import { useState } from "react";
+import { DecksWrapper, DecksHeader } from "./decks.styles.component";
 import { Deck as DeckType } from "../../utils/firebase/firebase.utils";
 import { ReactComponent as FilterIcon } from "../../assets/icons/fliter-icon.svg";
 import { ReactComponent as AddIcon } from "../../assets/icons/plus-icon.svg";
-import Spinner from "../ui/spinner/spinner.component";
 import DeckCreateModal from "../deck-create-modal/deck-create-modal.component";
 import CardAddModal from "../card-add-modal/card-add-modal.component";
-import useDecks from "./useDecks";
+import DecksList from "../decks-list/decksList.component";
 
-const Decks: FC = () => {
+const Decks = () => {
   const [isCreatingNewDeck, setIsCreatingNewDeck] = useState<boolean>(false);
-  const [isShowCreateModalWindow, setIsShowCreateModalWindow] =
-    useState<boolean>(false);
-  const [isShowCardAddModalWindow, setIsShowCardAddModalWindow] =
-    useState(false);
+  const [isShowCreateModalWindow, setIsShowCreateModalWindow] = useState<boolean>(false);
+  const [isShowCardAddModalWindow, setIsShowCardAddModalWindow] = useState<boolean>(false);
   const [deckForCards, setDeckForCards] = useState<DeckType>();
-  const { filteredDecks, isDecksLoading } = useDecks(isCreatingNewDeck);
-
   const creatingNewDeckStateHandler = (newDeck?: DeckType) => {
     setIsCreatingNewDeck(!isCreatingNewDeck);
     if (newDeck) {
@@ -47,13 +36,7 @@ const Decks: FC = () => {
             <AddIcon onClick={showCreateModalDeckHandler} />
           </div>
         </DecksHeader>
-        <DecksContainer>
-          {isDecksLoading ? (
-            <Spinner />
-          ) : (
-            filteredDecks.map((deck, index) => <Deck deck={deck} key={index} />)
-          )}
-        </DecksContainer>
+        <DecksList isCreatingNewDeck={isCreatingNewDeck} />
       </DecksWrapper>
       {isShowCreateModalWindow && (
         <DeckCreateModal
