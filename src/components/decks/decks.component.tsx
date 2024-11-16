@@ -28,7 +28,7 @@ const Decks = () => {
           setIsShowDeckCreateModalWindow={setIsShowDeckCreateModalWindow}
           setShouldRefetchDecksTrigger={setShouldRefetchDecksTrigger}
         />
-        </DecksWrapper>
+      </DecksWrapper>
     </>
   );
 };
