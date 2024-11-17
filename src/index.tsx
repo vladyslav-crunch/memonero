@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import "normalize.css";
 import { UserProvider } from "./contexts/user.context";
+import { DecksRefetchProvider } from "./contexts/decks-refetch.context";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
@@ -13,7 +15,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter basename={"/memonero"}>
       <UserProvider>
-        <App />
+        <DecksRefetchProvider>
+          <App />
+        </DecksRefetchProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -26,7 +26,7 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
   const [card, setCard] = useState<Card>(defaultCardFields);
   const { front, back, context } = card;
   const { user } = useUserContext();
-  const resetFormFields = () => setCard(defaultCardFields);
+  const resetFormFields = () => setCard({ ...defaultCardFields });
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (user) {
@@ -84,7 +84,7 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
             <Input
               value={context}
               name={"context"}
-              placeholder={"\n" + "スゴイ量だね！\n"}
+              placeholder={"スゴイ量だね！"}
               onChange={handleChange}
             />
           </div>

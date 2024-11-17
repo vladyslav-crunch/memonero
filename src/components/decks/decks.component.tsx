@@ -3,13 +3,12 @@ import { DecksWrapper, DecksHeader } from "./decks.styles.component";
 import { ReactComponent as FilterIcon } from "../../assets/icons/fliter-icon.svg";
 import { ReactComponent as AddIcon } from "../../assets/icons/plus-icon.svg";
 
-import DecksList from "../decks-list/decksList.component";
-import DecksModalsGroup from "../decks-modals-group/decks-modals-group";
+import DecksList from "../decks-list/decks-list.component";
+import DecksModalsGroupComponent from "../decks-modals-group/decks-modals-group.component";
 
 const Decks = () => {
-  const [shouldRefetchDecksTrigger, setShouldRefetchDecksTrigger] = useState<boolean>(false);
-  const [isShowDeckCreateModalWindow, setIsShowDeckCreateModalWindow] = useState<boolean>(false);
-
+  const [isShowDeckCreateModalWindow, setIsShowDeckCreateModalWindow] =
+    useState<boolean>(false);
   return (
     <>
       <DecksWrapper>
@@ -19,14 +18,17 @@ const Decks = () => {
           </div>
           <div style={{ display: "flex" }}>
             <FilterIcon />
-            <AddIcon onClick={() => setIsShowDeckCreateModalWindow(prevState => !prevState)} />
+            <AddIcon
+              onClick={() =>
+                setIsShowDeckCreateModalWindow((prevState) => !prevState)
+              }
+            />
           </div>
         </DecksHeader>
-        <DecksList shouldRefetchDecksTrigger={shouldRefetchDecksTrigger} />
-        <DecksModalsGroup
+        <DecksList />
+        <DecksModalsGroupComponent
           isShowDeckCreateModalWindow={isShowDeckCreateModalWindow}
           setIsShowDeckCreateModalWindow={setIsShowDeckCreateModalWindow}
-          setShouldRefetchDecksTrigger={setShouldRefetchDecksTrigger}
         />
       </DecksWrapper>
     </>

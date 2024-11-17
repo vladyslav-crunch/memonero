@@ -4,9 +4,9 @@ import Button, { BUTTON_TYPE_CLASSES } from "../ui/button/button.component";
 import { ReactComponent as CloseIcon } from "../../assets/icons/close-icon.svg";
 import Input from "../ui/input/input.component";
 import { createDeckDocument } from "../../utils/firebase/firebase.utils";
-import ToggleButton from "../ui/toggle-button/toggle-button.component";
 import { useUserContext } from "../../contexts/user.context";
 import { Deck } from "../../utils/firebase/firebase.utils";
+import DecksToggleButtonGroup from "../decks-toggle-button-group/decks-toggle-button-group.component";
 
 type DeckCreateModalProps = {
   onClose: () => void;
@@ -14,12 +14,12 @@ type DeckCreateModalProps = {
 };
 
 const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
+  const { user } = useUserContext();
   const [deck, setDeck] = useState<Deck>({
     deckName: "Unnamed deck",
     deckType: ["normal"],
   });
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = useUserContext();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -47,29 +47,6 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
     setDeck((prevDeck) => ({ ...prevDeck, deckName: value }));
   };
 
-  const handleToggle = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    type: string,
-  ) => {
-    event.preventDefault();
-    setDeck((prevDeck) => {
-      const { deckType } = prevDeck;
-      if (deckType.includes(type)) {
-        if (deckType.length > 1) {
-          return {
-            ...prevDeck,
-            deckType: deckType.filter((t) => t !== type),
-          };
-        }
-        return prevDeck;
-      }
-      return {
-        ...prevDeck,
-        deckType: [...deckType, type],
-      };
-    });
-  };
-
   return (
     <Modal onClose={onClose}>
       <div className="modalHeader">
@@ -92,23 +69,7 @@ const DeckCreateModal: FC<DeckCreateModalProps> = ({ onClose, onSubmit }) => {
             <label htmlFor="name" className="form-label">
               Deck type
             </label>
-            <div className="toggle-buttons">
-              <ToggleButton
-                label={"Normal"}
-                onClick={(event) => handleToggle(event, "normal")}
-                isToggled={deck.deckType.includes("normal")}
-              />
-              <ToggleButton
-                label={"Reversed"}
-                onClick={(event) => handleToggle(event, "reversed")}
-                isToggled={deck.deckType.includes("reversed")}
-              />
-              <ToggleButton
-                label={"Typing"}
-                onClick={(event) => handleToggle(event, "typing")}
-                isToggled={deck.deckType.includes("typing")}
-              />
-            </div>
+            <DecksToggleButtonGroup deck={deck} setDeck={setDeck} />
           </div>
           <Button
             buttonType={BUTTON_TYPE_CLASSES.orange}
