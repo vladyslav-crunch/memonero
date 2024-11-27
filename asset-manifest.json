@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/memonero/static/css/main.ef4eb634.css",
-    "main.js": "/memonero/static/js/main.85a87b05.js",
+    "main.js": "/memonero/static/js/main.eb1d0aee.js",
     "static/js/453.8a9ebcc2.chunk.js": "/memonero/static/js/453.8a9ebcc2.chunk.js",
     "static/media/setting-icon.svg": "/memonero/static/media/setting-icon.a9bd42a17adadbacbb46a3e5e30efdde.svg",
     "static/media/google-icon.svg": "/memonero/static/media/google-icon.ab403f220c9eab554bfac4ed7818a535.svg",
@@ -9,21 +9,26 @@
     "static/media/password-icon.svg": "/memonero/static/media/password-icon.f90dd49bc9ea6d90c2d217bba8218a39.svg",
     "static/media/logo.svg": "/memonero/static/media/logo.32f66706c785b2fec5c4e6beac602555.svg",
     "index.html": "/memonero/index.html",
+    "static/media/rocket-icon.svg": "/memonero/static/media/rocket-icon.087fe3f138f75d7b407cfbaadefa6bfe.svg",
     "static/media/fliter-icon.svg": "/memonero/static/media/fliter-icon.a999558221682cf8c6b94f6629a7eb69.svg",
     "static/media/close-icon.svg": "/memonero/static/media/close-icon.afa8a1ffb1f4610733c3b073b230e4b2.svg",
     "static/media/plus-icon.svg": "/memonero/static/media/plus-icon.7d2f2ad295f40733c9a2d47f7cedfbb1.svg",
+    "static/media/pencil-icon.svg": "/memonero/static/media/pencil-icon.f51dea2549b2e0bc7f3e9e05b5beaf8f.svg",
     "static/media/email-icon.svg": "/memonero/static/media/email-icon.72a0729642dd2697115c76087d8859ac.svg",
     "static/media/username-icon.svg": "/memonero/static/media/username-icon.b81151eafe966059d55d74c1345a6aec.svg",
     "static/media/profile-icon.svg": "/memonero/static/media/profile-icon.9afcd89fb7e9d87204a675d51148bbe6.svg",
     "static/media/search-icon.svg": "/memonero/static/media/search-icon.c79668e1d53e68c584b840af8f690aec.svg",
+    "static/media/export-icon.svg": "/memonero/static/media/export-icon.43e945579211d2dc12eff4c95c37bb97.svg",
+    "static/media/import-icon.svg": "/memonero/static/media/import-icon.f7595d9fa538efd6a857aea15ea6f14e.svg",
+    "static/media/list-icon.svg": "/memonero/static/media/list-icon.d2fe62cde31279e318113551a159944d.svg",
     "static/media/logout-icon.svg": "/memonero/static/media/logout-icon.e72f81f221237aff4096abd6c142186c.svg",
     "static/media/dropdown-icon.svg": "/memonero/static/media/dropdown-icon.7fcb3b5a7d9e8f7e4065f95574b09c55.svg",
     "main.ef4eb634.css.map": "/memonero/static/css/main.ef4eb634.css.map",
-    "main.85a87b05.js.map": "/memonero/static/js/main.85a87b05.js.map",
+    "main.eb1d0aee.js.map": "/memonero/static/js/main.eb1d0aee.js.map",
     "453.8a9ebcc2.chunk.js.map": "/memonero/static/js/453.8a9ebcc2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ef4eb634.css",
-    "static/js/main.85a87b05.js"
+    "static/js/main.eb1d0aee.js"
   ]
 }
