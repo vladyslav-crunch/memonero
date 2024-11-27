@@ -6,6 +6,7 @@ import Input from "../ui/input/input.component";
 import { Card, createCardDocument } from "../../utils/firebase/firebase.utils";
 import { useUserContext } from "../../contexts/user.context";
 import { Deck } from "../../utils/firebase/firebase.utils";
+import { useDecksRefetchContext } from "../../contexts/decks-refetch.context";
 
 type DeckCreateModalProps = {
   onClose: () => void;
@@ -21,12 +22,17 @@ const defaultCardFields: Card = {
   intervalStrength: 0,
 };
 
+let cardCounter = 0;
+
 const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
+  const { triggerRefetchDecks } = useDecksRefetchContext();
+
   const [isLoading, setIsLoading] = useState(false);
   const [card, setCard] = useState<Card>(defaultCardFields);
   const { front, back, context } = card;
   const { user } = useUserContext();
   const resetFormFields = () => setCard({ ...defaultCardFields });
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (user) {
@@ -36,10 +42,19 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
       } catch (err) {
         console.log(err);
       } finally {
+        cardCounter += 1;
+        console.log(cardCounter);
         setIsLoading(false);
         resetFormFields();
       }
     }
+  };
+
+  const onCloseHandler = () => {
+    console.log(cardCounter);
+    cardCounter && triggerRefetchDecks();
+    cardCounter = 0;
+    onClose();
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -48,10 +63,10 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
   };
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onCloseHandler}>
       <div className="modalHeader">
         <h2>Add new card to {deck.deckName}</h2>
-        <CloseIcon onClick={onClose} style={{ cursor: "pointer" }} />
+        <CloseIcon onClick={onCloseHandler} style={{ cursor: "pointer" }} />
       </div>
       <div className="modalBody">
         <form onSubmit={handleSubmit}>

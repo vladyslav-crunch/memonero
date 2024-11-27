@@ -9,7 +9,6 @@ import editIcon from "../../assets/icons/pencil-icon.svg";
 import exportIcon from "../../assets/icons/export-icon.svg";
 import importIcon from "../../assets/icons/import-icon.svg";
 import CardAddModal from "../card-add-modal/card-add-modal.component";
-import { useDecksRefetchContext } from "../../contexts/decks-refetch.context";
 
 type DeckMenuProps = {
   onClose: () => void;
@@ -18,10 +17,8 @@ type DeckMenuProps = {
 
 const DeckMenuModal: FC<DeckMenuProps> = ({ onClose, deck }) => {
   const [isShowCardAddModal, setIsShowCardAddModal] = useState(false);
-  const { triggerRefetchDecks } = useDecksRefetchContext();
 
   const onCloseCardAddModalWindow = () => {
-    triggerRefetchDecks();
     setIsShowCardAddModal(false);
   };
 
