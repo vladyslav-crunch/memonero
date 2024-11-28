@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Deck as DeckType,
   getDecksFromDB,
-} from "../../utils/firebase/firebase.utils";
-import { useUserContext } from "../../contexts/user.context";
+} from "../utils/firebase/firebase.utils";
+import { useUserContext } from "../contexts/user.context";
 import { useOutletContext } from "react-router-dom";
-import { useDecksRefetchContext } from "../../contexts/decks-refetch.context";
+import { useDecksRefetchContext } from "../contexts/decks-refetch.context";
 
 export default function useDecks() {
   const searchValue: string = useOutletContext();

@@ -3,8 +3,8 @@ import {
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../../utils/firebase/firebase.utils";
-import { AuthError, AuthErrorCodes, getRedirectResult } from "firebase/auth";
-import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { SignInFormStyled } from "./sign-in-form.styles";
 import FormInput from "../../ui/form-input/form-input.component";
 import EmailIcon from "../../../assets/auth-icons/email-icon.svg";

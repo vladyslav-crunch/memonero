@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import {
   AppWrapper,
   NavigationContainer,
@@ -9,8 +9,7 @@ import {
   UserWithoutPicture,
 } from "./navigation.style";
 import { ReactComponent as MemoneroLogo } from "../../assets/icons/logo.svg";
-
-import { ReactComponent as DrowdownIcon } from "../../assets/nav-icons/dropdown-icon.svg";
+import { ReactComponent as DropdownIcon } from "../../assets/nav-icons/dropdown-icon.svg";
 import { useState } from "react";
 import { useUserContext } from "../../contexts/user.context";
 import SearhBox from "../../components/ui/search-box/search-box.component";
@@ -19,7 +18,7 @@ import DropdownMenuComponent from "../../components/dropdown-menu/dropdown-menu.
 const Navigation = () => {
   const [isDropdownMenuOpen, setDropdownMenuOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-
+  const location = useLocation();
   const { user } = useUserContext();
 
   return (
@@ -32,14 +31,14 @@ const Navigation = () => {
           </Link>
         </NavigationLogo>
         <NavLinkContainer>
-          {<SearhBox onSearch={setSearchValue} />}
+          {location.pathname === "/" && <SearhBox onSearch={setSearchValue} />}
           <UserSection onClick={() => setDropdownMenuOpen(!isDropdownMenuOpen)}>
             {user!.photoURL ? (
               <img src={user?.photoURL} alt="profile picture" />
             ) : (
               <UserWithoutPicture />
             )}
-            <DrowdownIcon />
+            <DropdownIcon />
           </UserSection>
           {isDropdownMenuOpen && (
             <DropdownMenuComponent onOverlay={setDropdownMenuOpen} />

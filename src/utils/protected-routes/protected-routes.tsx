@@ -1,35 +1,23 @@
-import { useState, useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import { auth } from "../firebase/firebase.utils";
-import { onAuthStateChanged } from "firebase/auth";
-import {FC} from "react"
+import { FC } from "react";
+import { useUserContext } from "../../contexts/user.context";
+import Preloader from "../../components/preloader/preloader.component";
 
 type ProtectedRoutesProps = {
   type: string;
-}
+};
 
-const ProtectedRoutes: FC<ProtectedRoutesProps>= ({type}) => {
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
+const ProtectedRoutes: FC<ProtectedRoutesProps> = ({ type }) => {
+  const { user, loading } = useUserContext();
   if (loading) {
-    return <></>;
+    return <Preloader />;
   }
-  if(type === "Dashboard"){
+  if (type === "Dashboard") {
     return user ? <Outlet /> : <Navigate to="/sign-in" />;
-  }else if(type === "Auth"){
+  } else if (type === "Auth") {
     return user ? <Navigate to="/" /> : <Outlet />;
   }
-  return <></>
+  return <>404 Not Found</>;
 };
 
 export default ProtectedRoutes;
-

@@ -24,7 +24,6 @@ export const BaseButton = styled.button<ButtonProps>`
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
-
     background: ${({ icon }) => `url(${icon}) center center no-repeat; `};
   }
 `;
