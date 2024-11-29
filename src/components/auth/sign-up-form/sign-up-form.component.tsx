@@ -2,10 +2,8 @@ import { ChangeEvent, useState, FormEvent } from "react";
 import EmailIcon from "../../../assets/auth-icons/email-icon.svg";
 import UsernameIcon from "../../../assets/auth-icons/username-icon.svg";
 import PasswordIcon from "../../../assets/auth-icons/password-icon.svg";
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../../../utils/firebase/firebase.utils";
+import { createAuthUserWithEmailAndPassword } from "../../../utils/firebase/auth";
+import { createUserDocumentFromAuth } from "../../../utils/firebase/user";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
 import { SignUpFormStyled } from "./sign-up-form.styles";
 import FormInput from "../../ui/form-input/form-input.component";

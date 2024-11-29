@@ -1,8 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import {
-  Deck as DeckType,
-  getDecksFromDB,
-} from "../utils/firebase/firebase.utils";
+import { Deck as DeckType, getDecksFromDB } from "../utils/firebase/deck";
 import { useUserContext } from "../contexts/user.context";
 import { useOutletContext } from "react-router-dom";
 import { useDecksRefetchContext } from "../contexts/decks-refetch.context";

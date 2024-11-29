@@ -1,6 +1,6 @@
 import React from "react";
 import ToggleButton from "../ui/toggle-button/toggle-button.component";
-import { Deck } from "../../utils/firebase/firebase.utils";
+import { Deck } from "../../utils/firebase/deck";
 
 type DecksToggleButtonGroupComponentProps = {
   deck: Deck;

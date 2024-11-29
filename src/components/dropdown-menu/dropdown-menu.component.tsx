@@ -4,7 +4,7 @@ import {
   DropdownMenuItem,
   DropdownMenuOverlay,
 } from "./dropdown-menu.styles";
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { signOutUser } from "../../utils/firebase/auth";
 import { ReactComponent as ProfileIcon } from "../../assets/nav-icons/profile-icon.svg";
 import { ReactComponent as LogoutIcon } from "../../assets/nav-icons/logout-icon.svg";
 import { ReactComponent as SettingIcon } from "../../assets/nav-icons/setting-icon.svg";

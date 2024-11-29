@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Deck as DeckType } from "../../utils/firebase/firebase.utils";
+import { Deck as DeckType } from "../../utils/firebase/deck";
 import { DeckContainer } from "./deck.styles";
 import DeckMenuModal from "../deck-menu-modal/deck-menu.modal.comonent";
 

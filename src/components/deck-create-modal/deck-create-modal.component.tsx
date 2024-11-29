@@ -3,9 +3,9 @@ import Modal from "../ui/modal/modal.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../ui/button/button.component";
 import { ReactComponent as CloseIcon } from "../../assets/icons/close-icon.svg";
 import Input from "../ui/input/input.component";
-import { createDeckDocument } from "../../utils/firebase/firebase.utils";
+import { createDeckDocument } from "../../utils/firebase/deck";
 import { useUserContext } from "../../contexts/user.context";
-import { Deck } from "../../utils/firebase/firebase.utils";
+import { Deck } from "../../utils/firebase/deck";
 import DecksToggleButtonGroup from "../decks-toggle-button-group/decks-toggle-button-group.component";
 
 type DeckCreateModalProps = {

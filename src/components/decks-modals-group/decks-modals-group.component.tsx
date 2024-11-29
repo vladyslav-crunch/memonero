@@ -1,7 +1,7 @@
 import DeckCreateModal from "../deck-create-modal/deck-create-modal.component";
 import CardAddModal from "../card-add-modal/card-add-modal.component";
 import React, { useState } from "react";
-import { Deck as DeckType } from "../../utils/firebase/firebase.utils";
+import { Deck as DeckType } from "../../utils/firebase/deck";
 import { useDecksRefetchContext } from "../../contexts/decks-refetch.context";
 
 type Props = {
@@ -27,7 +27,6 @@ export default function DecksModalsGroupComponent({
   };
   const closeCardAddModalWindow = () => {
     setIsShowCardAddModalWindow(false);
-    triggerRefetchDecks();
   };
 
   return (

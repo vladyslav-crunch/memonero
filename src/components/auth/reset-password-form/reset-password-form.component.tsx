@@ -8,7 +8,7 @@ import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
-import { auth } from "../../../utils/firebase/firebase.utils";
+import { auth } from "../../../utils/firebase/firebaseConfig";
 import AuthFormContainerComponent from "../auth-form-container/auth-form-container.component";
 
 const defaultFormFields = {

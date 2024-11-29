@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import Modal from "../ui/modal/modal.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../ui/button/button.component";
-import { Deck } from "../../utils/firebase/firebase.utils";
+import { Deck } from "../../utils/firebase/deck";
 import rocketIcon from "../../assets/icons/rocket-icon.svg";
 import addIcon from "../../assets/icons/plus-icon.svg";
 import listIcon from "../../assets/icons/list-icon.svg";

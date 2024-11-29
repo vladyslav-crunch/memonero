@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import { User } from "firebase/auth";
-import { onAuthStateChangedListener } from "../utils/firebase/firebase.utils";
+import { onAuthStateChangedListener } from "../utils/firebase/auth";
 
 type UserContextType = {
   user: User | null;

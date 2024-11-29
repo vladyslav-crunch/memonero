@@ -1,8 +1,8 @@
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
-} from "../../../utils/firebase/firebase.utils";
+} from "../../../utils/firebase/auth";
+import { createUserDocumentFromAuth } from "../../../utils/firebase/user";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { SignInFormStyled } from "./sign-in-form.styles";

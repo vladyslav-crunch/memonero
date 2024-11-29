@@ -8,7 +8,7 @@ import ReactDOM from "react-dom";
 import EmailIcon from "../../../assets/auth-icons/email-icon.svg";
 import Button from "../../ui/button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
-import { sendPasswordResetLinkToEmail } from "../../../utils/firebase/firebase.utils";
+import { sendPasswordResetLinkToEmail } from "../../../utils/firebase/auth";
 import { useState } from "react";
 import { ChangeEvent } from "react";
 import { AuthErrorCodes, AuthError } from "firebase/auth";
