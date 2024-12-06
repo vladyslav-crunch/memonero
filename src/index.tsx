@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import "normalize.css";
 import { UserProvider } from "./contexts/user.context";
 import { DecksRefetchProvider } from "./contexts/decks-refetch.context";
+import { ToasterProvider } from "./contexts/toaster.context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -16,7 +17,9 @@ root.render(
     <BrowserRouter basename={"/memonero"}>
       <UserProvider>
         <DecksRefetchProvider>
-          <App />
+          <ToasterProvider>
+            <App />
+          </ToasterProvider>
         </DecksRefetchProvider>
       </UserProvider>
     </BrowserRouter>

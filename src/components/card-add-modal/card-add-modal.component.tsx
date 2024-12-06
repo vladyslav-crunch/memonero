@@ -7,6 +7,8 @@ import { Card, createCardDocument } from "../../utils/firebase/card";
 import { useUserContext } from "../../contexts/user.context";
 import { Deck } from "../../utils/firebase/deck";
 import { useDecksRefetchContext } from "../../contexts/decks-refetch.context";
+import { useToasterContext } from "../../contexts/toaster.context";
+import { toasterTypes } from "../ui/toaster/toaster.component";
 
 type DeckCreateModalProps = {
   onClose: () => void;
@@ -26,7 +28,7 @@ let cardCounter = 0;
 
 const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
   const { triggerRefetchDecks } = useDecksRefetchContext();
-
+  const { showToast } = useToasterContext();
   const [isLoading, setIsLoading] = useState(false);
   const [card, setCard] = useState<Card>(defaultCardFields);
   const { front, back, context } = card;
@@ -39,8 +41,10 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
       setIsLoading(true);
       try {
         await createCardDocument(user!, deck, card);
+        showToast("Card was added successfully", toasterTypes.success);
       } catch (err) {
         console.log(err);
+        showToast("Something went wrong", toasterTypes.error);
       } finally {
         cardCounter += 1;
         console.log(cardCounter);

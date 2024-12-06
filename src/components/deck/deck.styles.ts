@@ -6,7 +6,7 @@ export const DeckContainer = styled.div`
   background-color: #ffe9db;
   padding: 10px 55px 10px 15px;
   border-radius: 15px;
-  height: 100px;
+  height: 120px;
   width: calc(50% - 7.5px);
   position: relative;
   cursor: pointer;
