@@ -11,7 +11,9 @@ type ModalProps = {
 const Modal: FC<ModalProps> = ({ onClose, children, version }) => {
   return ReactDOM.createPortal(
     <>
-      <ModalWindowOverlay onClick={onClose}> </ModalWindowOverlay>
+      <ModalWindowOverlay onClick={onClose} version={version}>
+        {" "}
+      </ModalWindowOverlay>
       <MotionModalWindowWrapper
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

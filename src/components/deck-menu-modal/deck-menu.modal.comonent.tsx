@@ -9,6 +9,7 @@ import editIcon from "../../assets/icons/pencil-icon.svg";
 import exportIcon from "../../assets/icons/export-icon.svg";
 import importIcon from "../../assets/icons/import-icon.svg";
 import CardAddModal from "../card-add-modal/card-add-modal.component";
+import DeckEditModal from "../deck-edit-modal/deck-edit-modal.component";
 
 type DeckMenuProps = {
   onClose: () => void;
@@ -17,7 +18,7 @@ type DeckMenuProps = {
 
 const DeckMenuModal: FC<DeckMenuProps> = ({ onClose, deck }) => {
   const [isShowCardAddModal, setIsShowCardAddModal] = useState(false);
-
+  const [isShowDeckEditModal, setIsShowDeckEditModal] = useState(false);
   const onCloseCardAddModalWindow = () => {
     setIsShowCardAddModal(false);
   };
@@ -38,7 +39,11 @@ const DeckMenuModal: FC<DeckMenuProps> = ({ onClose, deck }) => {
         <Button buttonType={BUTTON_TYPE_CLASSES.menu} icon={listIcon}>
           Card list
         </Button>
-        <Button buttonType={BUTTON_TYPE_CLASSES.menu} icon={editIcon}>
+        <Button
+          onClick={() => setIsShowDeckEditModal(true)}
+          buttonType={BUTTON_TYPE_CLASSES.menu}
+          icon={editIcon}
+        >
           Edit deck
         </Button>
         <Button buttonType={BUTTON_TYPE_CLASSES.menu} icon={importIcon}>
@@ -50,6 +55,12 @@ const DeckMenuModal: FC<DeckMenuProps> = ({ onClose, deck }) => {
       </Modal>
       {isShowCardAddModal && (
         <CardAddModal onClose={onCloseCardAddModalWindow} deck={deck} />
+      )}
+      {isShowDeckEditModal && (
+        <DeckEditModal
+          onClose={() => setIsShowDeckEditModal(false)}
+          deck={deck}
+        />
       )}
     </>
   );

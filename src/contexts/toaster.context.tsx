@@ -32,7 +32,6 @@ export const ToasterProvider: FC<UserProviderProps> = ({ children }) => {
     setTimeout(() => removeToast(id), 3000);
   };
 
-  console.log(toasts);
   return (
     <ToasterContext.Provider value={{ showToast }}>
       {children}

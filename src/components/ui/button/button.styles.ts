@@ -3,10 +3,9 @@ import { SpinnerContainer } from "../spinner/spinner.styles";
 import { ButtonProps } from "./button.component";
 
 export const BaseButton = styled.button<ButtonProps>`
-  min-width: 165px;
   width: 100%;
   height: 55px;
-  border: 1px solid;
+  border: 1px solid #3a3a3a;
   border-radius: 10px;
   font-size: 20px;
   font-weight: 400;
@@ -16,6 +15,14 @@ export const BaseButton = styled.button<ButtonProps>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  background-color: #fff;
+
+  &:hover {
+    background-color: #fafafa;
+  }
+
+  transition: 0.2s;
+
   &::before {
     content: "";
     position: absolute;
@@ -89,6 +96,18 @@ export const MenuButton = styled(BaseButton)`
   &:hover {
     background-color: #ffd3ba;
   }
+  transition: 0.2s;
+`;
+
+export const RedButton = styled(BaseButton)`
+  border: none;
+  background-color: #ff7f7f;
+  color: #fff;
+
+  &:hover {
+    background-color: #f67575;
+  }
+
   transition: 0.2s;
 `;
 

@@ -33,21 +33,26 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
   const [card, setCard] = useState<Card>(defaultCardFields);
   const { front, back, context } = card;
   const { user } = useUserContext();
+  const [error, setError] = useState("");
   const resetFormFields = () => setCard({ ...defaultCardFields });
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (!(card.front && card.back)) {
+      setError("Please provide values for both the Front and Back fields.");
+      return;
+    }
     if (user) {
       setIsLoading(true);
       try {
         await createCardDocument(user!, deck, card);
+        setError("");
         showToast("Card was added successfully", toasterTypes.success);
       } catch (err) {
         console.log(err);
         showToast("Something went wrong", toasterTypes.error);
       } finally {
         cardCounter += 1;
-        console.log(cardCounter);
         setIsLoading(false);
         resetFormFields();
       }
@@ -55,7 +60,6 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
   };
 
   const onCloseHandler = () => {
-    console.log(cardCounter);
     cardCounter && triggerRefetchDecks();
     cardCounter = 0;
     onClose();
@@ -107,6 +111,7 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
               onChange={handleChange}
             />
           </div>
+          {error && <p id={"error-message"}>{error}</p>}
           <Button
             buttonType={BUTTON_TYPE_CLASSES.orange}
             type={"submit"}

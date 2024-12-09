@@ -6,6 +6,9 @@ import {
   query,
   where,
   getDoc,
+  setDoc,
+  doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import { User } from "firebase/auth";
@@ -26,6 +29,15 @@ export const createDeckDocument = async (userAuth: User, deck: Deck) => {
   );
   return await getDoc(deckDocRef);
 };
+
+export const editDeckDocument = async (userAuth: User, deck: Deck) => {
+  if (!userAuth?.uid || !deck?.id) throw new Error("Problem with User or Deck");
+  const deckDocRef = doc(db, "users", userAuth.uid, "decks", deck.id);
+  await setDoc(deckDocRef, deck);
+  return await getDoc(deckDocRef);
+};
+
+//#TODO Store the numberOfCards and numberOfCardsToRepeat as fields directly in each deck document in the future
 
 export const getDecksFromDB = async (userAuth: User): Promise<Deck[]> => {
   try {
@@ -66,4 +78,9 @@ export const getDecksFromDB = async (userAuth: User): Promise<Deck[]> => {
     console.error("Error fetching decks:", error);
     return [];
   }
+};
+
+export const deleteDeckFromDB = async (userAuth: User, deck: Deck) => {
+  if (!userAuth?.uid || !deck?.id) throw new Error("Problem with User or Deck");
+  await deleteDoc(doc(db, "users", userAuth.uid, "decks", deck.id));
 };
