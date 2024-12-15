@@ -10,13 +10,11 @@ import { ReactComponent as LogoutIcon } from "../../assets/nav-icons/logout-icon
 import { ReactComponent as SettingIcon } from "../../assets/nav-icons/setting-icon.svg";
 import { FC } from "react";
 
-type DropdownMenuComponentProps = {
+type DropdownMenuProps = {
   onOverlay: (value: boolean) => void;
 };
 
-const DropdownMenuComponent: FC<DropdownMenuComponentProps> = ({
-  onOverlay,
-}) => {
+const DropdownMenu: FC<DropdownMenuProps> = ({ onOverlay }) => {
   const onClickHandler = () => {
     onOverlay(false);
   };
@@ -41,4 +39,4 @@ const DropdownMenuComponent: FC<DropdownMenuComponentProps> = ({
   );
 };
 
-export default DropdownMenuComponent;
+export default DropdownMenu;

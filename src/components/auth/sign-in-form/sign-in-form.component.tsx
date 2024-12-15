@@ -17,7 +17,7 @@ import { AnimatePresence } from "framer-motion";
 import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordModal from "../forgot-password-modal/forgot-password-modal.component";
-import AuthFormContainerComponent from "../auth-form-container/auth-form-container.component";
+import AuthFormContainer from "../auth-form-container/auth-form-container.component";
 
 let TimeoutCounter: NodeJS.Timeout | undefined;
 
@@ -99,7 +99,7 @@ const SignInForm = () => {
   };
 
   return (
-    <AuthFormContainerComponent>
+    <AuthFormContainer>
       <h2>Welcome Back!</h2>
       <SignInFormStyled onSubmit={handleSubmit} error={error}>
         <FormInput
@@ -147,7 +147,7 @@ const SignInForm = () => {
       {isModalOpen && (
         <ForgotPasswordModal onClose={() => setModalOpen(false)} />
       )}
-    </AuthFormContainerComponent>
+    </AuthFormContainer>
   );
 };
 

@@ -13,7 +13,7 @@ import { ReactComponent as DropdownIcon } from "../../assets/nav-icons/dropdown-
 import { useState } from "react";
 import { useUserContext } from "../../contexts/user.context";
 import SearhBox from "../../components/ui/search-box/search-box.component";
-import DropdownMenuComponent from "../../components/dropdown-menu/dropdown-menu.component";
+import DropdownMenu from "../../components/dropdown-menu/dropdown.menu";
 
 const Navigation = () => {
   const [isDropdownMenuOpen, setDropdownMenuOpen] = useState(false);
@@ -30,20 +30,26 @@ const Navigation = () => {
             <span>Memonero</span>
           </Link>
         </NavigationLogo>
-        <NavLinkContainer>
-          {location.pathname === "/" && <SearhBox onSearch={setSearchValue} />}
-          <UserSection onClick={() => setDropdownMenuOpen(!isDropdownMenuOpen)}>
-            {user!.photoURL ? (
-              <img src={user?.photoURL} alt="profile picture" />
-            ) : (
-              <UserWithoutPicture />
+        {user && (
+          <NavLinkContainer>
+            {location.pathname === "/" && (
+              <SearhBox onSearch={setSearchValue} />
             )}
-            <DropdownIcon />
-          </UserSection>
-          {isDropdownMenuOpen && (
-            <DropdownMenuComponent onOverlay={setDropdownMenuOpen} />
-          )}
-        </NavLinkContainer>
+            <UserSection
+              onClick={() => setDropdownMenuOpen(!isDropdownMenuOpen)}
+            >
+              {user!.photoURL ? (
+                <img src={user?.photoURL} alt="profile" />
+              ) : (
+                <UserWithoutPicture />
+              )}
+              <DropdownIcon />
+            </UserSection>
+            {isDropdownMenuOpen && (
+              <DropdownMenu onOverlay={setDropdownMenuOpen} />
+            )}
+          </NavLinkContainer>
+        )}
       </NavigationContainer>
       <OutletWrapper>
         <Outlet context={searchValue} />

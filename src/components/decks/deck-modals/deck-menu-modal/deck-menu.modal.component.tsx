@@ -1,13 +1,15 @@
 import React, { FC, useState } from "react";
-import Modal from "../ui/modal/modal.component";
-import Button, { BUTTON_TYPE_CLASSES } from "../ui/button/button.component";
-import { Deck } from "../../utils/firebase/deck";
-import rocketIcon from "../../assets/icons/rocket-icon.svg";
-import addIcon from "../../assets/icons/plus-icon.svg";
-import listIcon from "../../assets/icons/list-icon.svg";
-import editIcon from "../../assets/icons/pencil-icon.svg";
-import exportIcon from "../../assets/icons/export-icon.svg";
-import importIcon from "../../assets/icons/import-icon.svg";
+import Modal from "../../../ui/modal/modal.component";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../../ui/button/button.component";
+import { Deck } from "../../../../utils/firebase/deck";
+import rocketIcon from "../../../../assets/icons/rocket-icon.svg";
+import addIcon from "../../../../assets/icons/plus-icon.svg";
+import listIcon from "../../../../assets/icons/list-icon.svg";
+import editIcon from "../../../../assets/icons/pencil-icon.svg";
+import exportIcon from "../../../../assets/icons/export-icon.svg";
+import importIcon from "../../../../assets/icons/import-icon.svg";
 import CardAddModal from "../card-add-modal/card-add-modal.component";
 import DeckEditModal from "../deck-edit-modal/deck-edit-modal.component";
 
@@ -19,9 +21,6 @@ type DeckMenuProps = {
 const DeckMenuModal: FC<DeckMenuProps> = ({ onClose, deck }) => {
   const [isShowCardAddModal, setIsShowCardAddModal] = useState(false);
   const [isShowDeckEditModal, setIsShowDeckEditModal] = useState(false);
-  const onCloseCardAddModalWindow = () => {
-    setIsShowCardAddModal(false);
-  };
 
   return (
     <>
@@ -54,7 +53,10 @@ const DeckMenuModal: FC<DeckMenuProps> = ({ onClose, deck }) => {
         </Button>
       </Modal>
       {isShowCardAddModal && (
-        <CardAddModal onClose={onCloseCardAddModalWindow} deck={deck} />
+        <CardAddModal
+          onClose={() => setIsShowCardAddModal(false)}
+          deck={deck}
+        />
       )}
       {isShowDeckEditModal && (
         <DeckEditModal

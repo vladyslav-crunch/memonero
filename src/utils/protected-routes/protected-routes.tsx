@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { FC } from "react";
 import { useUserContext } from "../../contexts/user.context";
-import Preloader from "../../components/preloader/preloader.component";
+import Preloader from "../../components/ui/preloader/preloader.component";
 
 type ProtectedRoutesProps = {
   type: string;

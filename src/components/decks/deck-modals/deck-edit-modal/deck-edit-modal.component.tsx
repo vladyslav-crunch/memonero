@@ -1,16 +1,22 @@
 import React, { ChangeEvent, FC, useState } from "react";
-import Modal from "../ui/modal/modal.component";
-import Button, { BUTTON_TYPE_CLASSES } from "../ui/button/button.component";
-import { ReactComponent as CloseIcon } from "../../assets/icons/close-icon.svg";
-import Input from "../ui/input/input.component";
-import { Deck, editDeckDocument } from "../../utils/firebase/deck";
-import { useUserContext } from "../../contexts/user.context";
-import { useToasterContext } from "../../contexts/toaster.context";
-import DecksToggleButtonGroup from "../decks-toggle-button-group/decks-toggle-button-group.component";
-import { toasterTypes } from "../ui/toaster/toaster.component";
-import { useDecksRefetchContext } from "../../contexts/decks-refetch.context";
-import { ReactComponent as BinIcon } from "../../assets/icons/bin-icon.svg";
-import ActionConfirmModal from "../action-confirm-modal/action-confirm-modal.component";
+import Modal from "../../../ui/modal/modal.component";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../../ui/button/button.component";
+import { ReactComponent as CloseIcon } from "../../../../assets/icons/close-icon.svg";
+import Input from "../../../ui/input/input.component";
+import {
+  Deck,
+  deleteDeckFromDB,
+  editDeckDocument,
+} from "../../../../utils/firebase/deck";
+import { useUserContext } from "../../../../contexts/user.context";
+import { useToasterContext } from "../../../../contexts/toaster.context";
+import DecksToggleButtonGroup from "../../decks-toggle-button-group/decks-toggle-button-group.component";
+import { toasterTypes } from "../../../ui/toaster/toaster.component";
+import { useDecksRefetchContext } from "../../../../contexts/decks-refetch.context";
+import { ReactComponent as BinIcon } from "../../../../assets/icons/bin-icon.svg";
+import DeleteConfirmModal from "../../../modals/delete-confirm-modal/delete-confirm-modal.component";
 
 type DeckEditModalProps = {
   onClose: () => void;
@@ -26,11 +32,18 @@ const DeckEditModal: FC<DeckEditModalProps> = ({ onClose, deck }) => {
   const [isShowConfirmModal, setIsShowConfirmModal] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
+    if (deck === editedDeck) {
+      return;
+    }
+    const updatedDeck = {
+      ...editedDeck,
+      deckName: editedDeck.deckName.trim() || "Unnamed deck",
+    };
     event.preventDefault();
     if (user) {
       setIsLoading(true);
       try {
-        await editDeckDocument(user, editedDeck);
+        await editDeckDocument(user, updatedDeck);
         showToast("Deck was edited successfully", toasterTypes.success);
       } catch (err) {
         console.log(err);
@@ -51,16 +64,19 @@ const DeckEditModal: FC<DeckEditModalProps> = ({ onClose, deck }) => {
   const handleDelete = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsShowConfirmModal(true);
-    // if (user) {
-    //   try {
-    //     await deleteDeckFromDB(user, editedDeck);
-    //     showToast("Deck was deleted successfully", toasterTypes.success);
-    //     triggerRefetchDecks();
-    //   } catch (err) {
-    //     console.log(err);
-    //     showToast("Something went wrong", toasterTypes.error);
-    //   }
-    // }
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      if (user) {
+        await deleteDeckFromDB(user, editedDeck);
+        showToast("Deck was deleted successfully", toasterTypes.success);
+      }
+    } catch (e) {
+      showToast("Something went wrong", toasterTypes.error);
+    } finally {
+      triggerRefetchDecks();
+    }
   };
 
   return (
@@ -112,8 +128,9 @@ const DeckEditModal: FC<DeckEditModalProps> = ({ onClose, deck }) => {
         </div>
       </Modal>
       {isShowConfirmModal && (
-        <ActionConfirmModal
-          deck={editedDeck}
+        <DeleteConfirmModal
+          message={"Are you sure you want to delete this deck?"}
+          onSubmit={handleDeleteConfirm}
           onClose={() => setIsShowConfirmModal(false)}
         />
       )}

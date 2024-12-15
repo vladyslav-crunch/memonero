@@ -5,13 +5,11 @@ import { useMediaQuery } from "usehooks-ts";
 
 const AuthFormContainerMotion = motion(AuthFormContainerStyled);
 
-type AuthFormContainerComponentProps = {
+type AuthFormContainerProps = {
   children?: React.ReactNode;
 };
 
-const AuthFormContainerComponent: FC<AuthFormContainerComponentProps> = ({
-  children,
-}) => {
+const AuthFormContainer: FC<AuthFormContainerProps> = ({ children }) => {
   const isMobile = useMediaQuery("(max-width: 1100px)");
 
   const container = isMobile
@@ -36,4 +34,4 @@ const AuthFormContainerComponent: FC<AuthFormContainerComponentProps> = ({
   );
 };
 
-export default AuthFormContainerComponent;
+export default AuthFormContainer;

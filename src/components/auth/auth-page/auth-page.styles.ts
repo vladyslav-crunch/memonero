@@ -3,11 +3,12 @@ export const AuthContainer = styled.div`
   max-width: 1700px;
   margin: 0 auto;
   padding: 30px 40px;
-  height: calc(100vh - 94px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  height: 100%;
   position: relative;
-    
+
   &::after {
     content: "";
     z-index: -2;

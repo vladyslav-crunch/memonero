@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
-import { Deck as DeckType } from "../../utils/firebase/deck";
+import { Deck as DeckType } from "../../../utils/firebase/deck";
 import { DeckContainer } from "./deck.styles";
-import DeckMenuModal from "../deck-menu-modal/deck-menu.modal.comonent";
+import DeckMenuModal from "../deck-modals/deck-menu-modal/deck-menu.modal.component";
 
 type DeckProps = {
   deck: DeckType;

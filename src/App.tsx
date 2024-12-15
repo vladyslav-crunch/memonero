@@ -7,7 +7,6 @@ import SignIn from "./routes/sign-in/sign-in.component";
 import SignUp from "./routes/sign-up/sign-up.component";
 import ResetPassword from "./routes/reset-password/reset-password.component";
 import ProtectedRoutes from "./utils/protected-routes/protected-routes";
-import Header from "./components/header/header.component";
 
 function App() {
   return (
@@ -21,7 +20,7 @@ function App() {
         </Route>
       </Route>
       <Route element={<ProtectedRoutes type="Auth" />}>
-        <Route path="/" element={<Header />}>
+        <Route path="/" element={<Navigation />}>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/reset-password" element={<ResetPassword />} />

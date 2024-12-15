@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { DecksWrapper, DecksHeader } from "./decks.styles.component";
-import { ReactComponent as FilterIcon } from "../../assets/icons/fliter-icon.svg";
-import { ReactComponent as AddIcon } from "../../assets/icons/plus-icon.svg";
+import { ReactComponent as FilterIcon } from "../../../assets/icons/fliter-icon.svg";
+import { ReactComponent as AddIcon } from "../../../assets/icons/plus-icon.svg";
 
 import DecksList from "../decks-list/decks-list.component";
-import DecksModalsGroupComponent from "../decks-modals-group/decks-modals-group.component";
+import DecksModalsGroupComponent from "../deck-modals/decks-modals-group/decks-modals-group.component";
 
 const Decks = () => {
   const [isShowDeckCreateModalWindow, setIsShowDeckCreateModalWindow] =

@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import AuthErrorPopup from "../auth-error-popup/auth-error-popup.component";
 import Checkbox from "../../ui/checkbox/checkbox.component";
-import AuthFormContainerComponent from "../auth-form-container/auth-form-container.component";
+import AuthFormContainer from "../auth-form-container/auth-form-container.component";
 
 const defaultFormFields = {
   displayName: "",
@@ -109,7 +109,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <AuthFormContainerComponent>
+    <AuthFormContainer>
       <h2>Create your account</h2>
       <SignUpFormStyled onSubmit={handleSubmit} error={error}>
         <FormInput
@@ -170,7 +170,7 @@ const SignUpForm = () => {
           {isAuthErrorVisible && <AuthErrorPopup error={error!} key="toast" />}
         </AnimatePresence>
       </SignUpFormStyled>
-    </AuthFormContainerComponent>
+    </AuthFormContainer>
   );
 };
 

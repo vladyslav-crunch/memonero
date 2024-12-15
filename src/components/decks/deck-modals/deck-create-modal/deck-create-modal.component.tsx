@@ -1,13 +1,15 @@
 import React, { ChangeEvent, FC, useState } from "react";
-import Modal from "../ui/modal/modal.component";
-import Button, { BUTTON_TYPE_CLASSES } from "../ui/button/button.component";
-import { ReactComponent as CloseIcon } from "../../assets/icons/close-icon.svg";
-import Input from "../ui/input/input.component";
-import { createDeckDocument, Deck } from "../../utils/firebase/deck";
-import { useUserContext } from "../../contexts/user.context";
-import { useToasterContext } from "../../contexts/toaster.context";
-import DecksToggleButtonGroup from "../decks-toggle-button-group/decks-toggle-button-group.component";
-import { toasterTypes } from "../ui/toaster/toaster.component";
+import Modal from "../../../ui/modal/modal.component";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../../ui/button/button.component";
+import { ReactComponent as CloseIcon } from "../../../../assets/icons/close-icon.svg";
+import Input from "../../../ui/input/input.component";
+import { createDeckDocument, Deck } from "../../../../utils/firebase/deck";
+import { useUserContext } from "../../../../contexts/user.context";
+import { useToasterContext } from "../../../../contexts/toaster.context";
+import DecksToggleButtonGroup from "../../decks-toggle-button-group/decks-toggle-button-group.component";
+import { toasterTypes } from "../../../ui/toaster/toaster.component";
 
 type DeckCreateModalProps = {
   onClose: () => void;
