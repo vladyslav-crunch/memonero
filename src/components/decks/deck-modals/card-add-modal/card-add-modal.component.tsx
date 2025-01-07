@@ -75,7 +75,7 @@ const CardAddModal: FC<DeckCreateModalProps> = ({ onClose, deck }) => {
   return (
     <Modal onClose={onCloseHandler}>
       <div className="modalHeader">
-        <h2>Add new card to {deck.deckName}</h2>
+        <h2>Add new card to "{deck.deckName}"</h2>
         <CloseIcon onClick={onCloseHandler} style={{ cursor: "pointer" }} />
       </div>
       <div className="modalBody">

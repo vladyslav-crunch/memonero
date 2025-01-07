@@ -11,6 +11,7 @@ export const ToggleButtonContainer = styled.button<ToggleButtonContainerProps>`
   font-size: 16px !important;
   border-radius: 2px;
   cursor: pointer;
+  color: black;
   border: none;
   background-color: ${({ $isToggled }) =>
     $isToggled ? "rgba(241, 140, 41, 0.3)" : "rgba(255, 255, 255, 0.3)"};

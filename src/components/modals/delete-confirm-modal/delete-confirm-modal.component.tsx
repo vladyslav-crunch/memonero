@@ -2,13 +2,13 @@ import React, { FC, useState } from "react";
 import Modal from "../../ui/modal/modal.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../../ui/button/button.component";
 
-type ActionConfirmModalProps = {
+type DeleteConfirmModalProps = {
   message: string;
   onSubmit: () => void;
   onClose: () => void;
 };
 
-const DeleteConfirmModal: FC<ActionConfirmModalProps> = ({
+const DeleteConfirmModal: FC<DeleteConfirmModalProps> = ({
   onClose,
   onSubmit,
   message,

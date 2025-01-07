@@ -36,7 +36,7 @@ export const BaseToaster = styled.div`
   }
   @media (max-width: 600px) {
     min-height: 30px;
-    font-size: 12px;
+    font-size: 14px;
     width: 250px;
     &:not(:last-child) {
       margin-bottom: 10px;

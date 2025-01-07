@@ -16,7 +16,7 @@ export const BaseButton = styled.button<ButtonProps>`
   justify-content: center;
   cursor: pointer;
   background-color: #fff;
-
+  color: black;
   &:hover {
     background-color: #fafafa;
   }
@@ -93,6 +93,7 @@ export const BlackButton = styled(BaseButton)`
 export const MenuButton = styled(BaseButton)`
   border: none;
   background-color: #ffe1d1;
+  color: black;
   &:hover {
     background-color: #ffd3ba;
   }

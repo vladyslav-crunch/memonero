@@ -1,4 +1,4 @@
-import { collection, addDoc, getDoc } from "firebase/firestore";
+import { collection, addDoc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import { User } from "firebase/auth";
 import { Deck } from "./deck";
@@ -23,4 +23,19 @@ export const createCardDocument = async (
     card,
   );
   return await getDoc(cardDocRef);
+};
+
+export const getCardsFromDB = async (
+  userAuth: User,
+  deckId: string,
+): Promise<Card[]> => {
+  try {
+    const cardsSnapshot = await getDocs(
+      collection(db, "users", userAuth.uid, "decks", deckId, "cards"),
+    );
+    return [...cardsSnapshot.docs].map((doc) => doc.data()) as Card[];
+  } catch (error) {
+    console.error("Error fetching cards:", error);
+    throw error;
+  }
 };

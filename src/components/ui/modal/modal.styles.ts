@@ -67,7 +67,6 @@ export const ModalWindowWrapper = styled.div<modalProps>`
     font-size: 16px;
     font-weight: 300;
     color: #1a0933;
-    max-width: 450px;
   }
 
   input {
@@ -97,41 +96,63 @@ export const ModalWindowWrapper = styled.div<modalProps>`
     right: 20px;
     cursor: pointer;
   }
-  @media (max-width: 1100px) {
-    padding: 25px;
-    min-width: 320px;
+  @media (max-width: 620px) {
+    width: calc(100% - 30px);
+    h2 {
+      font-size: 20px;
+      width: 90%;
+    }
+    label {
+      font-size: 16px;
+    }
+    input {
+      height: 55px;
+    }
+    button {
+      font-size: 24px;
+      margin-top: 20px;
+      height: 55px;
+    }
   }
   ${({ version }) =>
     version === "menu" &&
     `
-width: 340px;
-padding: 9px !important;
-button{
-margin-top: 6px;
-font-size:16px;
-height:54px;
-}
-button:first-child{
-margin-top: 0;
-}`}
+    width: 340px;
+    padding: 9px !important;
+    button{
+    margin-top: 6px;
+    font-size:16px;
+    height:54px;
+  }
+  button:first-child{
+  margin-top: 0;
+  
+  }
+   @media (max-width: 350px) {
+    padding: 25px;
+    min-width: 100px;
+    max-width: 300px;
+  }
+  
+  `}
 
   ${({ version }) =>
     version === "confirm" &&
     `
-width: 535px;
-
-background-color: #fff;
-z-index:3;
-padding: 12px !important;
-.modalHeader{
-margin-bottom: 5px;
-}
-.modalBody{
-  padding:20px 40px;
-  p{
-  text-align:center;
-font-size:24px !important;
-font-weight:400}
+    width: 535px;
+    background-color: #fff;
+    z-index:3;
+    padding: 12px !important;
+    .modalHeader{
+       margin-bottom: 5px;
+      }
+    .modalBody{
+      padding:20px 40px;
+    p{
+      text-align:center;
+      font-size:24px !important;
+      font-weight:400
+      }
 }
 button{
 margin-top: 80px;

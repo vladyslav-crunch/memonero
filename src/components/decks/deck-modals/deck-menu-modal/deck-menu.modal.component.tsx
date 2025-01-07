@@ -12,6 +12,7 @@ import exportIcon from "../../../../assets/icons/export-icon.svg";
 import importIcon from "../../../../assets/icons/import-icon.svg";
 import CardAddModal from "../card-add-modal/card-add-modal.component";
 import DeckEditModal from "../deck-edit-modal/deck-edit-modal.component";
+import { useNavigate } from "react-router-dom";
 
 type DeckMenuProps = {
   onClose: () => void;
@@ -21,7 +22,11 @@ type DeckMenuProps = {
 const DeckMenuModal: FC<DeckMenuProps> = ({ onClose, deck }) => {
   const [isShowCardAddModal, setIsShowCardAddModal] = useState(false);
   const [isShowDeckEditModal, setIsShowDeckEditModal] = useState(false);
-
+  const navigate = useNavigate();
+  const routeChange = () => {
+    let path = "/cardlist/" + deck.id;
+    navigate(path);
+  };
   return (
     <>
       <Modal onClose={onClose} version={"menu"}>
@@ -35,7 +40,11 @@ const DeckMenuModal: FC<DeckMenuProps> = ({ onClose, deck }) => {
         >
           Add new card
         </Button>
-        <Button buttonType={BUTTON_TYPE_CLASSES.menu} icon={listIcon}>
+        <Button
+          buttonType={BUTTON_TYPE_CLASSES.menu}
+          icon={listIcon}
+          onClick={routeChange}
+        >
           Card list
         </Button>
         <Button

@@ -7,6 +7,7 @@ import SignIn from "./routes/sign-in/sign-in.component";
 import SignUp from "./routes/sign-up/sign-up.component";
 import ResetPassword from "./routes/reset-password/reset-password.component";
 import ProtectedRoutes from "./utils/protected-routes/protected-routes";
+import CardList from "./routes/card-list/card-list.component";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/cardlist/:deckId" element={<CardList />} />
           <Route path="/*" element={<Dashboard />} />
         </Route>
       </Route>

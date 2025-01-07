@@ -32,6 +32,7 @@ const DeckEditModal: FC<DeckEditModalProps> = ({ onClose, deck }) => {
   const [isShowConfirmModal, setIsShowConfirmModal] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     if (deck === editedDeck) {
       return;
     }
@@ -39,7 +40,6 @@ const DeckEditModal: FC<DeckEditModalProps> = ({ onClose, deck }) => {
       ...editedDeck,
       deckName: editedDeck.deckName.trim() || "Unnamed deck",
     };
-    event.preventDefault();
     if (user) {
       setIsLoading(true);
       try {
