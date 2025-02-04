@@ -39,7 +39,9 @@ export const editDeckDocument = async (userAuth: User, deck: Deck) => {
 
 //#TODO Store the numberOfCards and numberOfCardsToRepeat as fields directly in each deck document in the future
 
-export const getDecksFromDB = async (userAuth: User): Promise<Deck[]> => {
+export const getDecksWithCardsFromDB = async (
+  userAuth: User,
+): Promise<Deck[]> => {
   try {
     const decksSnapshot = await getDocs(
       collection(db, "users", userAuth.uid, "decks"),
@@ -73,6 +75,25 @@ export const getDecksFromDB = async (userAuth: User): Promise<Deck[]> => {
         };
       }),
     );
+    return decks;
+  } catch (error) {
+    console.error("Error fetching decks:", error);
+    return [];
+  }
+};
+
+export const getDecksFromDB = async (userAuth: User): Promise<Deck[]> => {
+  try {
+    const decksSnapshot = await getDocs(
+      collection(db, "users", userAuth.uid, "decks"),
+    );
+    const decks: Deck[] = decksSnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      } as Deck;
+    });
+
     return decks;
   } catch (error) {
     console.error("Error fetching decks:", error);

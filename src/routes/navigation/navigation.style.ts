@@ -27,11 +27,24 @@ export const AppWrapper = styled.div`
   }
 `;
 
-export const NavigationContainer = styled.div`
+export type NavigationProps = {
+  location: string;
+};
+
+export const NavigationContainer = styled.div<NavigationProps>`
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  ${({ location }) =>
+    location === "/sign-in" &&
+    `
+          @media (max-width: 1100px) {
+      justify-content: center;
+      span{
+      display: block !important;}
+    }
+  `}
 `;
 
 export const NavLinkContainer = styled.div`

@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { Deck as DeckType, getDecksFromDB } from "../utils/firebase/deck";
+import {
+  Deck as DeckType,
+  getDecksWithCardsFromDB,
+} from "../utils/firebase/deck";
 import { useUserContext } from "../contexts/user.context";
 import { useOutletContext } from "react-router-dom";
 import { useDecksRefetchContext } from "../contexts/decks-refetch.context";
@@ -15,7 +18,7 @@ export default function useDecks() {
     const getAndSetDecks = async () => {
       setIsDecksLoading(true);
       try {
-        setDecks(await getDecksFromDB(user!));
+        setDecks(await getDecksWithCardsFromDB(user!));
       } catch (e) {
       } finally {
         setIsDecksLoading(false);

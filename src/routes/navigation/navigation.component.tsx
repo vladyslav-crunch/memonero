@@ -23,7 +23,7 @@ const Navigation = () => {
 
   return (
     <AppWrapper>
-      <NavigationContainer>
+      <NavigationContainer location={location.pathname}>
         <NavigationLogo>
           <Link to={"/"}>
             <MemoneroLogo />
@@ -32,7 +32,8 @@ const Navigation = () => {
         </NavigationLogo>
         {user && (
           <NavLinkContainer>
-            {location.pathname === "/" && (
+            {(location.pathname === "/" ||
+              location.pathname.startsWith("/cardlist")) && (
               <SearhBox onSearch={setSearchValue} />
             )}
             <UserSection
