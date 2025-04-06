@@ -2,6 +2,8 @@
 
 A web application designed to help users effectively **learn and retain information** using the scientifically proven method of **spaced repetition**. Built with Firebase and Firestore, this app offers a clean UI, dynamic flashcard management, and smart review scheduling.
 
+![Preview](https://asset.cloudinary.com/dxuwyrdbv/51804b57e66125e6aac4e76a2c035f27)
+
 ## 🚀 Features
 
 - 🗂️ Create, edit, and delete flashcards
@@ -60,6 +62,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export default app;
 ```
+###
+
 ### 4. Contributing
 
 ```bash
