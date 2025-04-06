@@ -2,7 +2,7 @@
 
 A web application designed to help users effectively **learn and retain information** using the scientifically proven method of **spaced repetition**. Built with Firebase and Firestore, this app offers a clean UI, dynamic flashcard management, and smart review scheduling.
 
-![Preview](https://asset.cloudinary.com/dxuwyrdbv/51804b57e66125e6aac4e76a2c035f27)
+![Preview](https://res.cloudinary.com/dxuwyrdbv/image/upload/v1743968700/Zrzut_ekranu_2025-04-06_214102_pcbkrf.png)
 
 ## 🚀 Features
 
